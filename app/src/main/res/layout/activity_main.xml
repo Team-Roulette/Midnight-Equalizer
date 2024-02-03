@@ -480,6 +480,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
                             <me.tankery.lib.circularseekbar.CircularSeekBar
+                                android:id="@+id/seekbar_baseboost"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:cs_circle_style = "round"
@@ -539,6 +540,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
                             <me.tankery.lib.circularseekbar.CircularSeekBar
+                                android:id="@+id/seekbar_loudness"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:cs_circle_style = "round"
@@ -573,7 +575,7 @@
                                 android:layout_gravity="center_horizontal"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="5dp"
-                                android:text="Laoudness" />
+                                android:text="Loudness" />
 
                             <Switch
                                 android:id="@+id/switch3"
@@ -598,6 +600,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
                             <me.tankery.lib.circularseekbar.CircularSeekBar
+                                android:id="@+id/seekbar_virtualizer"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:cs_circle_style = "round"
