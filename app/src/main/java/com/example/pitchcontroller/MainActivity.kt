@@ -13,9 +13,10 @@ import android.Manifest
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.pitchcontroller.data.Presets
 import com.example.pitchcontroller.databinding.ActivityMainBinding
-import com.example.pitchcontroller.view.DynamicsProcessingService
+import com.example.pitchcontroller.models.presetList
+import com.example.pitchcontroller.models.presets
+import com.example.pitchcontroller.utils.DynamicsProcessingService
 import me.tankery.lib.circularseekbar.CircularSeekBar
 
 private const val TAG = "MainActivity"
@@ -32,8 +33,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         requestAudioPermission()
 
-        audioPlayer = DynamicsProcessingService(this, R.raw.cookie)
-        audioPlayer?.mediaPlayer?.start()
+        audioPlayer = DynamicsProcessingService()
+        //audioPlayer?.mediaPlayer?.start()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        audioPlayer?.mediaPlayer?.release()
+        //audioPlayer?.mediaPlayer?.release()
     }
 
     private fun requestAudioPermission() {
@@ -148,15 +149,17 @@ class MainActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(
             this,
             com.google.android.material.R.layout.support_simple_spinner_dropdown_item,
-            Presets.presetList
+            presetList
         )
+
 
         binding.spinner1.adapter = adapter
         binding.spinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                for (i in 0..<seekBars.size) {
-                    seekBars[i].progress = Presets.presets[p2].gains[i].toInt() + 15
-                }
+                    presets[p2].map.toList().forEachIndexed { index, pair ->
+                        seekBars[index].progress = pair.second.toInt() + 15
+                    }
+
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
