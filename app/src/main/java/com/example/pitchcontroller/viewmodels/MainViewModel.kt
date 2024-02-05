@@ -2,14 +2,10 @@ package com.example.pitchcontroller.viewmodels
 
 import android.media.AudioManager
 import androidx.lifecycle.ViewModel
+import com.example.pitchcontroller.models.Strength
 import com.example.pitchcontroller.utils.DynamicsProcessingService
 
 private const val TAG = "MainViewModel"
-
-data class Gain(
-    var currentStrength: Float = 0f,
-    var savedStrength: Float = 0f
-)
 
 class MainViewModel : ViewModel() {
     private var _dynamicProcessing = DynamicsProcessingService(
@@ -21,11 +17,12 @@ class MainViewModel : ViewModel() {
         mbcBandCount = 0,
         postEqInUse = true,
         postEqBandCount = 10,
-        limiterInUse = false)
+        limiterInUse = false
+    )
 
     private val _equalizerGains = mutableListOf(0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F)
-    private var _bassBoostStrength = Gain()
-    private var _loudnessStrength = Gain()
+    private var _bassBoostStrength = Strength()
+    private var _loudnessStrength = Strength()
 
     private var isEqualizerEnabled = false
     private var isBassBoostEnabled = false
@@ -63,15 +60,14 @@ class MainViewModel : ViewModel() {
             if(isBassBoostEnabled) _bassBoostStrength.savedStrength
             else 0f
 
-        _dynamicProcessing.setPostEqStrength(_bassBoostStrength.currentStrength, _loudnessStrength.currentStrength)
+        setPostEqStrength()
     }
     fun setBassBoostStrength(strength: Int) {
         _bassBoostStrength.savedStrength = strength.toFloat() * 15 / 100
         _bassBoostStrength.currentStrength = _bassBoostStrength.savedStrength
 
         if(isBassBoostEnabled)
-            _dynamicProcessing.setPostEqStrength(_bassBoostStrength.currentStrength, _loudnessStrength.currentStrength)
-
+            setPostEqStrength()
     }
 
     /**
@@ -83,21 +79,23 @@ class MainViewModel : ViewModel() {
             if(isLoudnessEnabled) _loudnessStrength.savedStrength
             else 0f
 
-        _dynamicProcessing.setPostEqStrength(_bassBoostStrength.currentStrength, _loudnessStrength.currentStrength)
+        setPostEqStrength()
     }
     fun setLoudnessStrength(strength: Int) {
         _loudnessStrength.savedStrength = strength.toFloat() * 15 / 100
         _loudnessStrength.currentStrength = _loudnessStrength.savedStrength
 
         if(isLoudnessEnabled)
-            _dynamicProcessing.setPostEqStrength(_bassBoostStrength.currentStrength, _loudnessStrength.currentStrength)
+            setPostEqStrength()
 
+    }
+
+    private fun setPostEqStrength() {
+        _dynamicProcessing.setPostEqStrength(_bassBoostStrength.currentStrength, _loudnessStrength.currentStrength)
     }
 
     fun releaseEqualizer() {
         if(_dynamicProcessing.dynamicsProcessing != null)
             _dynamicProcessing.dynamicsProcessing?.release()
     }
-
-
 }

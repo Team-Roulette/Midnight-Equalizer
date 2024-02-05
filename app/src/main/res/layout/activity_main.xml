@@ -642,13 +642,14 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
-                            android:text="Virtualizer" />
+                            android:text="Volume" />
 
                         <Switch
                             android:id="@+id/switch4"
                             android:layout_gravity="center_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
+                            android:checked="true"
                             android:track="@drawable/switch_track_selector"
                             android:thumb="@drawable/switch_thumb"
                             android:layout_marginBottom="5dp"
