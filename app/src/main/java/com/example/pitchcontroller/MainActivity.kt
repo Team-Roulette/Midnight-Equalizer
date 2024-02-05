@@ -80,16 +80,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        checkPermissions()
-        init()
-
         audioPlayer = DynamicsProcessingService()
         //audioPlayer?.mediaPlayer?.start()
-
         binding = ActivityMainBinding.inflate(layoutInflater)
+        checkPermissions()
+        init()
         setContentView(binding.root)
         initLayout()
-
     }
 
 
