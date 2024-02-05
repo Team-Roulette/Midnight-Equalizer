@@ -1,656 +1,659 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/midnight_blue"
     android:orientation="vertical"
     app:cardUseCompatPadding="true">
-    <TextView
-        android:id="@+id/title_catagory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="30dp"
-        android:text="Equalizer"
-        android:textColor="@color/black"
-        android:textSize="30dp"
-        android:textStyle="bold" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="20dp"
-        android:orientation="vertical"
-        android:gravity="fill">
+        android:gravity="fill"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
             <com.example.pitchcontroller.views.WaveformView
                 android:id="@+id/waveformView"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="20dp"
-                android:hardwareAccelerated="true"/>
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:cardCornerRadius="15dp"
-            app:cardUseCompatPadding="true"
-            android:id="@+id/mainCardView">
+                android:hardwareAccelerated="true" />
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardView3"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/midnight_blue"
+                android:orientation="vertical"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="10dp"
 
-                <androidx.cardview.widget.CardView
+                app:cardUseCompatPadding="true"
+                app:strokeColor="@color/white">
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="20dp"
                     android:orientation="vertical"
-                    app:cardCornerRadius="15dp"
-                    app:cardUseCompatPadding="true"
-                    android:id="@+id/cardView3">
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:id="@+id/subText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Equalizer"
+                            android:textColor="@color/white"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+
+                        <Switch
+                            android:id="@+id/switch1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:thumb="@drawable/switch_thumb"
+                            android:track="@drawable/switch_track_selector" />
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="25dp"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="20dp">
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/subText"
+                                android:id="@+id/textView1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="이퀄라이저!" />
-
-                            <Switch
-                                android:id="@+id/switch1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center_horizontal"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="25dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="3dp"
-                                android:layout_marginRight="3dp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/textView1"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:paddingTop="20dp"
-                                    android:text="0" />
-
-                                <SeekBar
-                                    android:id="@+id/seekBar1"
-                                    android:layout_width="200dp"
-                                    android:layout_height="200dp"
-                                    android:progress="15"
-                                    android:max="30"
-                                    android:rotation="270"
-                                    android:splitTrack="true"
-                                    android:translationX="-87dp" />
-
-                                <TextView
-                                    android:id="@+id/textView31"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:paddingBottom="20dp"
-                                    android:text="31" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="25dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="3dp"
-                                android:layout_marginRight="3dp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/textView2"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:paddingTop="20dp"
-                                    android:text="0" />
-
-                                <SeekBar
-                                    android:id="@+id/seekBar2"
-                                    android:layout_width="200dp"
-                                    android:layout_height="200dp"
-                                    android:progress="15"
-                                    android:max="30"
-                                    android:rotation="270"
-
-                                    android:splitTrack="true"
-                                    android:translationX="-87dp" />
-
-                                <TextView
-                                    android:id="@+id/textView62"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:paddingBottom="20dp"
-                                    android:text="62" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="25dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="3dp"
-                                android:layout_marginRight="3dp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/textView3"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:paddingTop="20dp"
-                                    android:text="0" />
-
-                                <SeekBar
-                                    android:id="@+id/seekBar3"
-                                    android:layout_width="200dp"
-                                    android:layout_height="200dp"
-                                    android:progress="15"
-                                    android:max="30"
-                                    android:rotation="270"
-                                    android:splitTrack="true"
-                                    android:translationX="-87dp" />
-
-                                <TextView
-                                    android:id="@+id/textView125"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:paddingBottom="20dp"
-                                    android:text="125" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="25dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="3dp"
-                                android:layout_marginRight="3dp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/textView4"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:paddingTop="20dp"
-                                    android:text="0" />
-
-                                <SeekBar
-                                    android:id="@+id/seekBar4"
-                                    android:layout_width="200dp"
-                                    android:layout_height="200dp"
-                                    android:progress="15"
-                                    android:max="30"
-                                    android:rotation="270"
-                                    android:splitTrack="true"
-                                    android:translationX="-87dp" />
-
-                                <TextView
-                                    android:id="@+id/textView250"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:paddingBottom="20dp"
-                                    android:text="250" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="25dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="3dp"
-                                android:layout_marginRight="3dp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/textView5"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:paddingTop="20dp"
-                                    android:text="0" />
-
-                                <SeekBar
-                                    android:id="@+id/seekBar5"
-                                    android:layout_width="200dp"
-                                    android:layout_height="200dp"
-                                    android:progress="15"
-                                    android:max="30"
-                                    android:rotation="270"
-                                    android:splitTrack="true"
-                                    android:translationX="-87dp" />
-
-                                <TextView
-                                    android:id="@+id/textView500"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:paddingBottom="20dp"
-                                    android:text="500" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="25dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="3dp"
-                                android:layout_marginRight="3dp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/textView6"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-
-                                    android:paddingTop="20dp"
-                                    android:text="0" />
-
-                                <SeekBar
-                                    android:id="@+id/seekBar6"
-                                    android:layout_width="200dp"
-                                    android:layout_height="200dp"
-                                    android:progress="15"
-                                    android:max="30"
-                                    android:rotation="270"
-                                    android:splitTrack="true"
-                                    android:translationX="-87dp" />
-
-                                <TextView
-                                    android:id="@+id/textView1k"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:paddingBottom="20dp"
-                                    android:text="1K" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="25dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="3dp"
-                                android:layout_marginRight="3dp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/textView7"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:paddingTop="20dp"
-                                    android:text="0" />
-
-                                <SeekBar
-                                    android:id="@+id/seekBar7"
-                                    android:layout_width="200dp"
-                                    android:layout_height="200dp"
-                                    android:progress="15"
-                                    android:max="30"
-                                    android:rotation="270"
-
-                                    android:splitTrack="true"
-                                    android:translationX="-87dp" />
-
-                                <TextView
-                                    android:id="@+id/textView2K"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:paddingBottom="20dp"
-                                    android:text="2K" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="25dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="3dp"
-                                android:layout_marginRight="3dp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/textView8"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:paddingTop="20dp"
-                                    android:text="0" />
-
-                                <SeekBar
-                                    android:id="@+id/seekBar8"
-                                    android:layout_width="200dp"
-                                    android:layout_height="200dp"
-                                    android:progress="15"
-                                    android:max="30"
-                                    android:rotation="270"
-                                    android:splitTrack="true"
-                                    android:translationX="-87dp" />
-
-                                <TextView
-                                    android:id="@+id/textView4K"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:paddingBottom="20dp"
-                                    android:text="4K" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="25dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="3dp"
-                                android:layout_marginRight="3dp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/textView9"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-
-                                    android:paddingTop="20dp"
-                                    android:text="0" />
-
-                                <SeekBar
-                                    android:id="@+id/seekBar9"
-                                    android:layout_width="200dp"
-                                    android:layout_height="200dp"
-                                    android:progress="15"
-                                    android:max="30"
-                                    android:rotation="270"
-                                    android:splitTrack="true"
-                                    android:translationX="-87dp" />
-
-                                <TextView
-                                    android:id="@+id/textView8K"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:paddingBottom="20dp"
-                                    android:text="8K" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="25dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="3dp"
-                                android:layout_marginRight="3dp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/textView10"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:paddingTop="20dp"
-                                    android:text="0" />
-
-                                <SeekBar
-                                    android:id="@+id/seekBar10"
-                                    android:layout_width="200dp"
-                                    android:layout_height="200dp"
-                                    android:progress="15"
-                                    android:max="30"
-                                    android:rotation="270"
-
-                                    android:splitTrack="true"
-                                    android:translationX="-87dp" />
-
-                                <TextView
-                                    android:id="@+id/textView16K"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:paddingBottom="20dp"
-                                    android:text="16K" />
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:paddingLeft="20dp"
-                            android:paddingRight="20dp"
-                            android:layout_marginBottom="10dp"
-                            >
-
-                            <TextView
-                                android:id="@+id/textView11"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
+                                android:layout_gravity="center"
                                 android:gravity="center"
-                                android:text="preset" />
+                                android:paddingTop="20dp"
+                                android:text="0" />
 
-                            <Spinner
-                                android:id="@+id/spinner1"
-                                android:layout_gravity="end"
-                                android:gravity="center_horizontal"
+                            <SeekBar
+                                android:id="@+id/seekBar1"
+                                android:layout_width="200dp"
+                                android:layout_height="200dp"
+                                android:max="30"
+                                android:progress="15"
+                                android:rotation="270"
+                                android:splitTrack="true"
+                                android:translationX="-87dp" />
+
+                            <TextView
+                                android:id="@+id/textView31"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1" />
+                                android:layout_gravity="center"
+                                android:paddingBottom="20dp"
+                                android:text="31" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="25dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:paddingTop="20dp"
+                                android:text="0" />
+
+                            <SeekBar
+                                android:id="@+id/seekBar2"
+                                android:layout_width="200dp"
+                                android:layout_height="200dp"
+                                android:max="30"
+                                android:progress="15"
+                                android:rotation="270"
+
+                                android:splitTrack="true"
+                                android:translationX="-87dp" />
+
+                            <TextView
+                                android:id="@+id/textView62"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingBottom="20dp"
+                                android:text="62" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="25dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:paddingTop="20dp"
+                                android:text="0" />
+
+                            <SeekBar
+                                android:id="@+id/seekBar3"
+                                android:layout_width="200dp"
+                                android:layout_height="200dp"
+                                android:max="30"
+                                android:progress="15"
+                                android:rotation="270"
+                                android:splitTrack="true"
+                                android:translationX="-87dp" />
+
+                            <TextView
+                                android:id="@+id/textView125"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingBottom="20dp"
+                                android:text="125" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="25dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:paddingTop="20dp"
+                                android:text="0" />
+
+                            <SeekBar
+                                android:id="@+id/seekBar4"
+                                android:layout_width="200dp"
+                                android:layout_height="200dp"
+                                android:max="30"
+                                android:progress="15"
+                                android:rotation="270"
+                                android:splitTrack="true"
+                                android:translationX="-87dp" />
+
+                            <TextView
+                                android:id="@+id/textView250"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingBottom="20dp"
+                                android:text="250" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="25dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:paddingTop="20dp"
+                                android:text="0" />
+
+                            <SeekBar
+                                android:id="@+id/seekBar5"
+                                android:layout_width="200dp"
+                                android:layout_height="200dp"
+                                android:max="30"
+                                android:progress="15"
+                                android:rotation="270"
+                                android:splitTrack="true"
+                                android:translationX="-87dp" />
+
+                            <TextView
+                                android:id="@+id/textView500"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingBottom="20dp"
+                                android:text="500" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="25dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+
+                                android:paddingTop="20dp"
+                                android:text="0" />
+
+                            <SeekBar
+                                android:id="@+id/seekBar6"
+                                android:layout_width="200dp"
+                                android:layout_height="200dp"
+                                android:max="30"
+                                android:progress="15"
+                                android:rotation="270"
+                                android:splitTrack="true"
+                                android:translationX="-87dp" />
+
+                            <TextView
+                                android:id="@+id/textView1k"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingBottom="20dp"
+                                android:text="1K" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="25dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:paddingTop="20dp"
+                                android:text="0" />
+
+                            <SeekBar
+                                android:id="@+id/seekBar7"
+                                android:layout_width="200dp"
+                                android:layout_height="200dp"
+                                android:max="30"
+                                android:progress="15"
+                                android:rotation="270"
+
+                                android:splitTrack="true"
+                                android:translationX="-87dp" />
+
+                            <TextView
+                                android:id="@+id/textView2K"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingBottom="20dp"
+                                android:text="2K" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="25dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView8"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:paddingTop="20dp"
+                                android:text="0" />
+
+                            <SeekBar
+                                android:id="@+id/seekBar8"
+                                android:layout_width="200dp"
+                                android:layout_height="200dp"
+                                android:max="30"
+                                android:progress="15"
+                                android:rotation="270"
+                                android:splitTrack="true"
+                                android:translationX="-87dp" />
+
+                            <TextView
+                                android:id="@+id/textView4K"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingBottom="20dp"
+                                android:text="4K" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="25dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView9"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+
+                                android:paddingTop="20dp"
+                                android:text="0" />
+
+                            <SeekBar
+                                android:id="@+id/seekBar9"
+                                android:layout_width="200dp"
+                                android:layout_height="200dp"
+                                android:max="30"
+                                android:progress="15"
+                                android:rotation="270"
+                                android:splitTrack="true"
+                                android:translationX="-87dp" />
+
+                            <TextView
+                                android:id="@+id/textView8K"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingBottom="20dp"
+                                android:text="8K" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="25dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:paddingTop="20dp"
+                                android:text="0" />
+
+                            <SeekBar
+                                android:id="@+id/seekBar10"
+                                android:layout_width="200dp"
+                                android:layout_height="200dp"
+                                android:max="30"
+                                android:progress="15"
+                                android:rotation="270"
+
+                                android:splitTrack="true"
+                                android:translationX="-87dp" />
+
+                            <TextView
+                                android:id="@+id/textView16K"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingBottom="20dp"
+                                android:text="16K" />
                         </LinearLayout>
 
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp">
+
+                        <TextView
+                            android:id="@+id/textViewPreset"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="preset"
+                            android:textColor="@color/white" />
+
+                        <Spinner
+                            android:id="@+id/spinner1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_weight="1"
+
+                            android:gravity="center_horizontal" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView4"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="15dp"
+                    app:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <me.tankery.lib.circularseekbar.CircularSeekBar
+                            android:id="@+id/seekbar_baseboost"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cs_circle_color="@color/gray"
+                            app:cs_circle_fill="@color/white"
+                            app:cs_circle_progress_color="@color/midnight_blue"
+                            app:cs_circle_stroke_width="5dp"
+                            app:cs_circle_style="round"
+                            app:cs_circle_x_radius="0dp"
+                            app:cs_circle_y_radius="0dp"
+
+                            app:cs_disable_pointer="false"
+                            app:cs_disable_progress_glow="true"
+                            app:cs_hide_progress_when_empty="false"
+                            app:cs_maintain_equal_circle="true"
+                            app:cs_max="100"
+                            app:cs_move_outside_circle="true"
+                            app:cs_negative_enabled="false"
+                            app:cs_pointer_alpha_ontouch="5"
+                            app:cs_pointer_angle="0"
+                            app:cs_pointer_color="@color/midnight_blue"
+                            app:cs_pointer_halo_border_width="5dp"
+                            app:cs_pointer_halo_width="5dp"
+                            app:cs_pointer_stroke_width="10dp"
+                            app:cs_progress="20"
+                            app:cs_use_custom_radii="false" />
+
+                        <TextView
+                            android:id="@+id/textViewBaseBoost"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="5dp"
+                            android:text="Bass Boost" />
+
+                        <Switch
+                            android:id="@+id/switch2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal" />
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardView5"
+                    android:layout_width="40dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/midnight_blue"
+                    android:orientation="vertical"
+                    app:cardCornerRadius="15dp"
+                    app:cardUseCompatPadding="true">
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cardView4"
-                        android:layout_width="40dp"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="15dp"
-                        app:cardUseCompatPadding="true">
-
-                        <LinearLayout
+                        <me.tankery.lib.circularseekbar.CircularSeekBar
+                            android:id="@+id/seekbar_loudness"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <me.tankery.lib.circularseekbar.CircularSeekBar
-                                android:id="@+id/seekbar_baseboost"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:cs_circle_style = "round"
-                                app:cs_progress = "20"
-                                app:cs_max = "100"
-                                app:cs_negative_enabled = "false"
-                                app:cs_move_outside_circle = "true"
-                                app:cs_maintain_equal_circle = "true"
-                                app:cs_use_custom_radii = "false"
+                            app:cs_circle_color="@color/gray"
+                            app:cs_circle_fill="@color/midnight_blue"
+                            app:cs_circle_progress_color="@color/white"
+                            app:cs_circle_stroke_width="5dp"
+                            app:cs_circle_style="round"
+                            app:cs_circle_x_radius="0dp"
+                            app:cs_circle_y_radius="0dp"
 
-                                app:cs_circle_x_radius = "0dp"
-                                app:cs_circle_y_radius = "0dp"
-                                app:cs_circle_stroke_width = "5dp"
-                                app:cs_disable_pointer = "false"
-                                app:cs_pointer_stroke_width = "10dp"
-                                app:cs_pointer_halo_width = "5dp"
-                                app:cs_pointer_halo_border_width = "5dp"
-                                app:cs_circle_fill = "@color/gray"
-                                app:cs_circle_color = "@color/black"
-                                app:cs_circle_progress_color = "@color/purple"
-                                app:cs_pointer_color = "@color/purple"
+                            app:cs_disable_pointer="false"
+                            app:cs_disable_progress_glow="true"
+                            app:cs_hide_progress_when_empty="false"
+                            app:cs_maintain_equal_circle="true"
+                            app:cs_max="100"
+                            app:cs_move_outside_circle="true"
+                            app:cs_negative_enabled="false"
+                            app:cs_pointer_alpha_ontouch="5"
+                            app:cs_pointer_angle="0"
+                            app:cs_pointer_color="@color/white"
+                            app:cs_pointer_halo_border_width="5dp"
 
-                                app:cs_pointer_alpha_ontouch = "5"
-                                app:cs_pointer_angle = "0"
-                                app:cs_disable_progress_glow = "true"
-                                app:cs_hide_progress_when_empty = "false"
-                                />
+                            app:cs_pointer_halo_width="5dp"
+                            app:cs_pointer_stroke_width="10dp"
+                            app:cs_progress="20"
+                            app:cs_use_custom_radii="false" />
 
-                            <TextView
-                                android:id="@+id/textViewBaseBoost"
-                                android:layout_width="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="5dp"
-                                android:text="Bass Boost" />
-
-                            <Switch
-                                android:id="@+id/switch2"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                />
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cardView5"
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="15dp"
-                        app:cardUseCompatPadding="true">
-
-                        <LinearLayout
+                        <TextView
+                            android:id="@+id/textViewLaoudness"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <me.tankery.lib.circularseekbar.CircularSeekBar
-                                android:id="@+id/seekbar_loudness"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:cs_circle_style = "round"
-                                app:cs_progress = "20"
-                                app:cs_max = "100"
-                                app:cs_negative_enabled = "false"
-                                app:cs_move_outside_circle = "true"
-                                app:cs_maintain_equal_circle = "true"
-                                app:cs_use_custom_radii = "false"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="5dp"
+                            android:text="Loudness"
+                            android:textColor="@color/white" />
 
-                                app:cs_circle_x_radius = "0dp"
-                                app:cs_circle_y_radius = "0dp"
-                                app:cs_circle_stroke_width = "5dp"
-                                app:cs_disable_pointer = "false"
-                                app:cs_pointer_stroke_width = "10dp"
-                                app:cs_pointer_halo_width = "5dp"
-                                app:cs_pointer_halo_border_width = "5dp"
-                                app:cs_circle_fill = "@color/gray"
-                                app:cs_circle_color = "@color/black"
-                                app:cs_circle_progress_color = "@color/purple"
-                                app:cs_pointer_color = "@color/purple"
-
-                                app:cs_pointer_alpha_ontouch = "5"
-                                app:cs_pointer_angle = "0"
-                                app:cs_disable_progress_glow = "true"
-                                app:cs_hide_progress_when_empty = "false"
-                                />
-
-                            <TextView
-                                android:id="@+id/textViewLaoudness"
-                                android:layout_width="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="5dp"
-                                android:text="Loudness" />
-
-                            <Switch
-                                android:id="@+id/switch3"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                />
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cardView6"
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="15dp"
-                        app:cardUseCompatPadding="true">
-
-                        <LinearLayout
+                        <Switch
+                            android:id="@+id/switch3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <me.tankery.lib.circularseekbar.CircularSeekBar
-                                android:id="@+id/seekbar_virtualizer"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:cs_circle_style = "round"
-                                app:cs_progress = "20"
-                                app:cs_max = "100"
-                                app:cs_negative_enabled = "false"
-                                app:cs_move_outside_circle = "true"
-                                app:cs_maintain_equal_circle = "true"
-                                app:cs_use_custom_radii = "false"
 
-                                app:cs_circle_x_radius = "0dp"
-                                app:cs_circle_y_radius = "0dp"
-                                app:cs_circle_stroke_width = "5dp"
-                                app:cs_disable_pointer = "false"
-                                app:cs_pointer_stroke_width = "10dp"
-                                app:cs_pointer_halo_width = "5dp"
-                                app:cs_pointer_halo_border_width = "5dp"
-                                app:cs_circle_fill = "@color/gray"
-                                app:cs_circle_color = "@color/black"
-                                app:cs_circle_progress_color = "@color/purple"
-                                app:cs_pointer_color = "@color/purple"
+                            android:layout_gravity="center_horizontal" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-                                app:cs_pointer_alpha_ontouch = "5"
-                                app:cs_pointer_angle = "0"
-                                app:cs_disable_progress_glow = "true"
-                                app:cs_hide_progress_when_empty = "false"
-                                />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView6"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
 
-                            <TextView
-                                android:id="@+id/textViewVirtualizer"
-                                android:layout_width="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="5dp"
-                                android:text="Virtualizer" />
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    app:cardCornerRadius="15dp"
+                    app:cardUseCompatPadding="true">
 
-                            <Switch
-                                android:id="@+id/switch4"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                />
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-                </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <me.tankery.lib.circularseekbar.CircularSeekBar
+                            android:id="@+id/seekbar_virtualizer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cs_circle_color="@color/gray"
+                            app:cs_circle_fill="@color/white"
+                            app:cs_circle_progress_color="@color/midnight_blue"
+                            app:cs_circle_stroke_width="5dp"
+                            app:cs_circle_style="round"
+                            app:cs_circle_x_radius="0dp"
+                            app:cs_circle_y_radius="0dp"
+
+                            app:cs_disable_pointer="false"
+                            app:cs_disable_progress_glow="true"
+                            app:cs_hide_progress_when_empty="false"
+                            app:cs_maintain_equal_circle="true"
+                            app:cs_max="100"
+                            app:cs_move_outside_circle="true"
+                            app:cs_negative_enabled="false"
+                            app:cs_pointer_alpha_ontouch="5"
+                            app:cs_pointer_angle="0"
+                            app:cs_pointer_color="@color/midnight_blue"
+                            app:cs_pointer_halo_border_width="5dp"
+
+                            app:cs_pointer_halo_width="5dp"
+                            app:cs_pointer_stroke_width="10dp"
+                            app:cs_progress="20"
+                            app:cs_use_custom_radii="false" />
+
+                        <TextView
+                            android:id="@+id/textViewVirtualizer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="5dp"
+                            android:text="Virtualizer" />
+
+                        <Switch
+                            android:id="@+id/switch4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>

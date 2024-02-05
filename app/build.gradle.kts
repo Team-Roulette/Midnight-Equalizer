@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.pitchcontroller"
-        minSdk = 30
+        minSdk = 33
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -48,6 +48,7 @@ dependencies {
     implementation("androidx.media3:media3-session:1.2.1")
     implementation ("androidx.cardview:cardview:1.0.0")
     implementation("me.tankery.lib:circularSeekBar:1.4.2")
+    implementation("com.google.android.material:material:1.0.0")
     
     testImplementation("junit:junit:4.13.2")
 
