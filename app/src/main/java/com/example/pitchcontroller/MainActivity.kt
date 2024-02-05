@@ -20,7 +20,6 @@ import com.example.pitchcontroller.utils.DynamicsProcessingService
 import me.tankery.lib.circularseekbar.CircularSeekBar
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.media.AudioAttributes
 import android.media.AudioFormat
 import android.media.AudioPlaybackCaptureConfiguration
@@ -29,7 +28,6 @@ import android.media.AudioTrack
 import android.media.projection.MediaProjection
 import android.media.projection.MediaProjectionManager
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -40,7 +38,6 @@ const val MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1
 class MainActivity : AppCompatActivity() {
     private val REQUEST_RECORD_AUDIO_PERMISSION = 200
 
-    lateinit var binding: ActivityMainBinding
     lateinit var seekBars: List<SeekBar>
     lateinit var textViews: List<TextView>
 
@@ -80,6 +77,20 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "모든 권한 승인되어야 함", Toast.LENGTH_SHORT).show()
             }
         }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        checkPermissions()
+        init()
+
+        audioPlayer = DynamicsProcessingService()
+        //audioPlayer?.mediaPlayer?.start()
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        initLayout()
+
+    }
 
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -162,7 +173,6 @@ class MainActivity : AppCompatActivity() {
                         Log.i("test", "Read $readResult bytes from audio record")
                     }
 
-                    audioRecord.
                     Thread.sleep(1000)
                 }
                 // 오디오 레코드 정지 및 자원 해제
@@ -191,29 +201,12 @@ class MainActivity : AppCompatActivity() {
                     .setEncoding(AudioFormat.ENCODING_PCM_16BIT)
                     .setSampleRate(44100)
                     .setChannelMask(AudioFormat.CHANNEL_IN_STEREO)
-                    .build())
+                    .build()
+            )
             .setBufferSizeInBytes(1024)
             .setAudioPlaybackCaptureConfig(config) // 오디오 재생 캡처 구성 설정
             .build()
         AudioCaptureData.isReady.postValue(true)
-  
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        checkPermissions()
-        init()
-
-        audioPlayer = DynamicsProcessingService()
-        //audioPlayer?.mediaPlayer?.start()
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        initLayout()
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        //audioPlayer?.mediaPlayer?.release()
     }
 
 
