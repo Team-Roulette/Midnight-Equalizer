@@ -1,4 +1,4 @@
-package com.example.pitchcontroller
+package com.example.pitchcontroller.utils
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -9,15 +9,14 @@ import android.content.Intent
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.example.pitchcontroller.AudioController.requestAudioFocus
+import com.example.pitchcontroller.MainActivity
+import com.example.pitchcontroller.R
 
 class ForegroundService() : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         // 알림 생성 및 시작
         Log.i("test", "Intent: ${intent.toString()}")
-//        registerAudioReceiver(applicationContext)
-//        requestAudioFocus()
         startForegroundService()
         return START_STICKY
     }
