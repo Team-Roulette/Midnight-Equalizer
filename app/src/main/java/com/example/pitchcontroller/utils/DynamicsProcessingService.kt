@@ -9,7 +9,6 @@ import android.media.audiofx.LoudnessEnhancer
 import android.media.audiofx.Virtualizer
 import android.util.Log
 import androidx.annotation.RawRes
-import com.example.pitchcontroller.AudioController.init
 import com.example.pitchcontroller.models.Frequencies
 import com.example.pitchcontroller.models.presets
 
