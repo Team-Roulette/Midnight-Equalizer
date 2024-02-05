@@ -1,6 +1,23 @@
 package com.example.pitchcontroller
 
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
+import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.SeekBar
+import android.widget.TextView
+import android.Manifest
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.example.pitchcontroller.databinding.ActivityMainBinding
+import com.example.pitchcontroller.models.presetList
+import com.example.pitchcontroller.models.presets
+import com.example.pitchcontroller.utils.DynamicsProcessingService
+import me.tankery.lib.circularseekbar.CircularSeekBar
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -13,16 +30,22 @@ import android.media.projection.MediaProjection
 import android.media.projection.MediaProjectionManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import com.example.pitchcontroller.databinding.ActivityMainBinding
 
+private const val TAG = "MainActivity"
 const val MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1
 
 class MainActivity : AppCompatActivity() {
+    private val REQUEST_RECORD_AUDIO_PERMISSION = 200
+
+    lateinit var binding: ActivityMainBinding
+    lateinit var seekBars: List<SeekBar>
+    lateinit var textViews: List<TextView>
+
+    var audioPlayer: DynamicsProcessingService? = null
+  
     private lateinit var binding: ActivityMainBinding
     private lateinit var mediaProjection: MediaProjection
     private lateinit var mediaProjectionManager: MediaProjectionManager
@@ -58,13 +81,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        checkPermissions()
-        init()
-    }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun checkPermissions() {
@@ -180,5 +196,164 @@ class MainActivity : AppCompatActivity() {
             .setAudioPlaybackCaptureConfig(config) // 오디오 재생 캡처 구성 설정
             .build()
         AudioCaptureData.isReady.postValue(true)
+  
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        checkPermissions()
+        init()
+
+        audioPlayer = DynamicsProcessingService()
+        //audioPlayer?.mediaPlayer?.start()
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        initLayout()
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        //audioPlayer?.mediaPlayer?.release()
+    }
+
+
+    @SuppressLint("ResourceType")
+    private fun initLayout() {
+        setSwitch()
+        setSeekBar()
+        setSpinner()
+        setGauge()
+    }
+
+    private fun setSwitch() {
+        binding.apply {
+            switch1.setOnCheckedChangeListener { _, isChecked ->
+                audioPlayer?.setEqualizerEnabled(isChecked)
+            }
+
+            switch2.setOnCheckedChangeListener { _, isChecked ->
+                audioPlayer?.setBassBoostEnable(isChecked)
+            }
+
+            switch3.setOnCheckedChangeListener { _, isChecked ->
+                audioPlayer?.setVirtualizerEnable(isChecked)
+            }
+
+            switch4.setOnCheckedChangeListener { _, isChecked ->
+                audioPlayer?.setLoudnessEnhancerEnable(isChecked)
+            }
+        }
+    }
+
+    private fun setSeekBar() {
+        binding.apply {
+            seekBars = listOf(
+                seekBar1,
+                seekBar2,
+                seekBar3,
+                seekBar4,
+                seekBar5,
+                seekBar6,
+                seekBar7,
+                seekBar8,
+                seekBar9,
+                seekBar10
+            )
+            textViews = listOf(
+                textView1,
+                textView2,
+                textView3,
+                textView4,
+                textView5,
+                textView6,
+                textView7,
+                textView8,
+                textView9,
+                textView10,
+            )
+            seekBars.forEachIndexed { index, seekBar ->
+                seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                    override fun onProgressChanged(
+                        seekBar: SeekBar?,
+                        progress: Int,
+                        fromUser: Boolean
+                    ) {
+                        val num = progress - 15
+                        audioPlayer?.setEqualizerGainByIndex(index, num.toFloat())
+                        textViews[index].text = num.toString()
+                    }
+
+                    override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                        // 사용자가 터치를 시작할 때의 로직을 여기에 작성합니다.
+                    }
+
+                    override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                        // 터치를 멈췄을 때의 로직을 여기에 작성합니다.
+                    }
+                })
+            }
+        }
+    }
+
+    private fun setSpinner() {
+        val adapter = ArrayAdapter(
+            this,
+            com.google.android.material.R.layout.support_simple_spinner_dropdown_item,
+            presetList
+        )
+
+
+        binding.spinner1.adapter = adapter
+        binding.spinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                    presets[p2].map.toList().forEachIndexed { index, pair ->
+                        seekBars[index].progress = pair.second.toInt() + 15
+                    }
+
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+
+        }
+    }
+
+    private fun setGauge() {
+        binding.apply {
+            val unitArr = arrayOf<(strength:Int) -> Unit>(
+                {
+                    audioPlayer?.setBassBoostStrength(it)
+                }, {
+                    audioPlayer?.setLoudnessEnhancerStrength(it)
+                }, {
+                    audioPlayer?.setVirtualizerStrength(it)
+                }
+            )
+
+            val seekBars = arrayOf(
+                seekbarBaseboost, seekbarLoudness, seekbarVirtualizer
+            )
+
+            seekBars.forEachIndexed { index, seekBar ->
+                seekBar.setOnSeekBarChangeListener(object :
+                    CircularSeekBar.OnCircularSeekBarChangeListener {
+                    override fun onProgressChanged(
+                        circularSeekBar: CircularSeekBar?,
+                        progress: Float,
+                        fromUser: Boolean
+                    ) {
+                        unitArr[index](progress.toInt())
+                        Log.d(TAG, progress.toString())
+                    }
+
+                    override fun onStartTrackingTouch(seekBar: CircularSeekBar?) {
+                    }
+
+                    override fun onStopTrackingTouch(seekBar: CircularSeekBar?) {}
+
+                })
+            }
+        }
     }
 }
