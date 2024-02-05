@@ -16,11 +16,13 @@ import com.example.pitchcontroller.models.presets
 import com.example.pitchcontroller.utils.DynamicsProcessingService
 import me.tankery.lib.circularseekbar.CircularSeekBar
 import android.content.Intent
+import android.graphics.PorterDuff
 
 import android.os.Build
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import com.example.pitchcontroller.utils.ForegroundService
 
 private const val TAG = "MainActivity"
@@ -29,7 +31,8 @@ private const val MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1
 class MainActivity : AppCompatActivity() {
 
     private lateinit var seekBars: List<SeekBar>
-    private lateinit var textViews: List<TextView>
+    private lateinit var gains: List<TextView>
+    private lateinit var frequencies: List<TextView>
 
     private lateinit var binding: ActivityMainBinding
     private val permissions = arrayOf(
