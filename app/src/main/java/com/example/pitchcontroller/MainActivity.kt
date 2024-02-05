@@ -222,7 +222,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             switch2.setOnCheckedChangeListener { _, isChecked ->
-                audioPlayer?.setBassBoostEnable(isChecked)
+                audioPlayer?.setBassBoostEnabled(isChecked)
             }
 
             switch3.setOnCheckedChangeListener { _, isChecked ->
@@ -230,7 +230,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             switch4.setOnCheckedChangeListener { _, isChecked ->
-                audioPlayer?.setLoudnessEnhancerEnable(isChecked)
+                audioPlayer?.setLoudnessEnhancerEnabled(isChecked)
             }
         }
     }
