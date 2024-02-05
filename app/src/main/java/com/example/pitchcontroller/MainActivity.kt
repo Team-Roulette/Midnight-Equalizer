@@ -18,12 +18,14 @@ import me.tankery.lib.circularseekbar.CircularSeekBar
 import android.content.Intent
 import android.graphics.PorterDuff
 
+import android.media.audiofx.Visualizer
 import android.os.Build
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.example.pitchcontroller.utils.ForegroundService
+import com.example.pitchcontroller.views.WaveformView
 
 private const val TAG = "MainActivity"
 private const val MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1
@@ -33,8 +35,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var seekBars: List<SeekBar>
     private lateinit var gains: List<TextView>
     private lateinit var frequencies: List<TextView>
-
+    private lateinit var visualizer: Visualizer
+    private lateinit var waveformView: WaveformView
     private lateinit var binding: ActivityMainBinding
+    private val audioSessionId = 0
     private val permissions = arrayOf(
         android.Manifest.permission.POST_NOTIFICATIONS,
         android.Manifest.permission.READ_MEDIA_AUDIO,
@@ -59,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         checkPermissions()
         init()
+        initVisualizer()
         setContentView(binding.root)
         initLayout()
     }
@@ -86,6 +91,24 @@ class MainActivity : AppCompatActivity() {
             // 다른 'case' 라인을 여기에 추가할 수 있습니다.
         }
     }
+    private fun initVisualizer() {
+        waveformView = binding.waveformView
+        visualizer = Visualizer(audioSessionId).apply {
+            captureSize = Visualizer.getCaptureSizeRange()[1]
+            scalingMode = Visualizer.SCALING_MODE_NORMALIZED
+
+            setDataCaptureListener(object : Visualizer.OnDataCaptureListener {
+                override fun onWaveFormDataCapture(visualizer: Visualizer, waveform: ByteArray, samplingRate: Int) {
+                    waveformView.updateWaveform(waveform)
+                }
+                override fun onFftDataCapture(visualizer: Visualizer, fft: ByteArray, samplingRate: Int) {
+                    // FFT 데이터 처리 (선택적)
+                }
+            }, Visualizer.getMaxCaptureRate(), true, false)
+            enabled = true // Visualizer 시작
+        }
+        visualizer.enabled = true // Visualizer 시작
+    }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun init() {
@@ -109,7 +132,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             switch2.setOnCheckedChangeListener { _, isChecked ->
-                audioPlayer?.setBassBoostEnable(isChecked)
+                audioPlayer?.setBassBoostEnabled(isChecked)
             }
 
             switch3.setOnCheckedChangeListener { _, isChecked ->
@@ -117,7 +140,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             switch4.setOnCheckedChangeListener { _, isChecked ->
-                audioPlayer?.setLoudnessEnhancerEnable(isChecked)
+                audioPlayer?.setLoudnessEnhancerEnabled(isChecked)
             }
         }
     }
@@ -262,6 +285,12 @@ class MainActivity : AppCompatActivity() {
 
                 })
             }
+        }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        if (::visualizer.isInitialized) {
+            visualizer.release() // 리소스 정리
         }
     }
 }
