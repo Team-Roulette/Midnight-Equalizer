@@ -3,19 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/midnight_blue"
     android:orientation="vertical"
-    app:cardUseCompatPadding="true"
-    >
-    <TextView
-        android:id="@+id/title_catagory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="30dp"
-        android:text="Equalizer"
-        android:textColor="@color/black"
-        android:textSize="30dp"
-        android:textStyle="bold" />
+    app:cardUseCompatPadding="true">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,30 +14,30 @@
         android:orientation="vertical"
         android:gravity="fill"
         >
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:cardCornerRadius="15dp"
-            app:cardUseCompatPadding="true"
-            android:id="@+id/mainCardView">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:cardCornerRadius="15dp"
+                    app:cardElevation="10dp"
+                    app:strokeColor="@color/white"
+                    android:backgroundTint="@color/midnight_blue"
+
                     app:cardUseCompatPadding="true"
                     android:id="@+id/cardView3">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:layout_marginBottom="20dp"
                         android:orientation="vertical">
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -59,13 +50,21 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="이퀄라이저!" />
+                                android:textSize="20dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/white"
+                                android:text="Equalizer" />
 
                             <Switch
                                 android:id="@+id/switch1"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1" />
+                                android:layout_height="20dp"
+                                android:layout_weight="1"
+                                android:track="@drawable/switch_track_selector"
+                                android:thumb="@drawable/switch_thumb"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                />
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -441,11 +440,12 @@
                             >
 
                             <TextView
-                                android:id="@+id/textView11"
+                                android:id="@+id/textViewPreset"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="center"
+                                android:textColor="@color/white"
                                 android:text="preset" />
 
                             <Spinner
@@ -454,11 +454,12 @@
                                 android:gravity="center_horizontal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+
                                 android:layout_weight="1" />
                         </LinearLayout>
 
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -469,7 +470,7 @@
                         android:id="@+id/cardView4"
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
-
+                        app:cardBackgroundColor="@color/white"
                         android:orientation="vertical"
                         android:layout_weight="1"
                         app:cardCornerRadius="15dp"
@@ -498,11 +499,10 @@
                                 app:cs_pointer_stroke_width = "10dp"
                                 app:cs_pointer_halo_width = "5dp"
                                 app:cs_pointer_halo_border_width = "5dp"
-                                app:cs_circle_fill = "@color/gray"
-                                app:cs_circle_color = "@color/black"
-                                app:cs_circle_progress_color = "@color/purple"
-                                app:cs_pointer_color = "@color/purple"
-
+                                app:cs_circle_fill = "@color/white"
+                                app:cs_circle_color = "@color/gray"
+                                app:cs_circle_progress_color = "@color/midnight_blue"
+                                app:cs_pointer_color = "@color/midnight_blue"
                                 app:cs_pointer_alpha_ontouch = "5"
                                 app:cs_pointer_angle = "0"
                                 app:cs_disable_progress_glow = "true"
@@ -525,11 +525,11 @@
                                 />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cardView5"
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
-
+                        android:backgroundTint="@color/midnight_blue"
                         android:orientation="vertical"
                         android:layout_weight="1"
                         app:cardCornerRadius="15dp"
@@ -558,10 +558,10 @@
                                 app:cs_pointer_stroke_width = "10dp"
                                 app:cs_pointer_halo_width = "5dp"
                                 app:cs_pointer_halo_border_width = "5dp"
-                                app:cs_circle_fill = "@color/gray"
-                                app:cs_circle_color = "@color/black"
-                                app:cs_circle_progress_color = "@color/purple"
-                                app:cs_pointer_color = "@color/purple"
+                                app:cs_circle_fill = "@color/midnight_blue"
+                                app:cs_circle_color = "@color/gray"
+                                app:cs_circle_progress_color = "@color/white"
+                                app:cs_pointer_color = "@color/white"
 
                                 app:cs_pointer_alpha_ontouch = "5"
                                 app:cs_pointer_angle = "0"
@@ -574,6 +574,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/white"
                                 android:layout_marginBottom="5dp"
                                 android:text="Loudness" />
 
@@ -581,10 +582,11 @@
                                 android:id="@+id/switch3"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_width="wrap_content"
+                                
                                 android:layout_height="wrap_content"
                                 />
                         </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardView6"
                         android:layout_width="40dp"
@@ -618,10 +620,10 @@
                                 app:cs_pointer_stroke_width = "10dp"
                                 app:cs_pointer_halo_width = "5dp"
                                 app:cs_pointer_halo_border_width = "5dp"
-                                app:cs_circle_fill = "@color/gray"
-                                app:cs_circle_color = "@color/black"
-                                app:cs_circle_progress_color = "@color/purple"
-                                app:cs_pointer_color = "@color/purple"
+                                app:cs_circle_fill = "@color/white"
+                                app:cs_circle_color = "@color/gray"
+                                app:cs_circle_progress_color = "@color/midnight_blue"
+                                app:cs_pointer_color = "@color/midnight_blue"
 
                                 app:cs_pointer_alpha_ontouch = "5"
                                 app:cs_pointer_angle = "0"
@@ -647,6 +649,6 @@
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+
     </LinearLayout>
 </LinearLayout>
