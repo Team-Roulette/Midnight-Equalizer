@@ -45,9 +45,10 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.media3:media3-session:1.2.1")
     implementation ("androidx.cardview:cardview:1.0.0")
     implementation("me.tankery.lib:circularSeekBar:1.4.2")
-
+    
     testImplementation("junit:junit:4.13.2")
 
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
