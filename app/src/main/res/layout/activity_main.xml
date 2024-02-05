@@ -90,28 +90,24 @@
                                 android:id="@+id/textView1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:paddingTop="20dp"
-                                android:text="0" />
 
-                            <SeekBar
-                                android:id="@+id/seekBar1"
-                                android:layout_width="200dp"
-                                android:layout_height="200dp"
-                                android:max="30"
-                                android:progress="15"
-                                android:rotation="270"
-                                android:splitTrack="true"
-                                android:translationX="-87dp" />
+                                android:layout_weight="1"
+                                android:textSize="20dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/white"
+                                android:text="Equalizer" />
 
-                            <TextView
-                                android:id="@+id/textView31"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:paddingBottom="20dp"
-                                android:text="31" />
+                            <Switch
+                                android:id="@+id/switch1"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:layout_weight="1"
+                                android:track="@drawable/switch_track_selector"
+                                android:thumb="@drawable/switch_thumb"
+
+
+                                />
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -176,13 +172,15 @@
                                 android:splitTrack="true"
                                 android:translationX="-87dp" />
 
-                            <TextView
-                                android:id="@+id/textView125"
-                                android:layout_width="wrap_content"
+
+                            <Spinner
+                                android:id="@+id/spinner1"
+                                android:layout_gravity="end"
+                                android:gravity="center_horizontal"
+                                android:layout_width="40dp"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:paddingBottom="20dp"
-                                android:text="125" />
+                                android:layout_weight="1" />
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -211,14 +209,18 @@
                                 android:splitTrack="true"
                                 android:translationX="-87dp" />
 
-                            <TextView
-                                android:id="@+id/textView250"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:paddingBottom="20dp"
-                                android:text="250" />
-                        </LinearLayout>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardView4"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        app:strokeWidth="2dp"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="15dp"
+                        app:cardUseCompatPadding="true">
+
 
                         <LinearLayout
                             android:layout_width="25dp"
@@ -285,11 +287,24 @@
                             <TextView
                                 android:id="@+id/textView1k"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:paddingBottom="20dp"
-                                android:text="1K" />
+
+                                android:layout_height="30dp"
+                                android:track="@drawable/switch_track_selector"
+                                android:thumb="@drawable/switch_thumb"
+                                android:layout_marginBottom="5dp"
+                                />
                         </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardView5"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/midnight_blue"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="15dp"
+                        app:cardUseCompatPadding="true">
+
 
                         <LinearLayout
                             android:layout_width="25dp"
@@ -337,30 +352,25 @@
                             <TextView
                                 android:id="@+id/textView8"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:paddingTop="20dp"
-                                android:text="0" />
 
-                            <SeekBar
-                                android:id="@+id/seekBar8"
-                                android:layout_width="200dp"
-                                android:layout_height="200dp"
-                                android:max="30"
-                                android:progress="15"
-                                android:rotation="270"
-                                android:splitTrack="true"
-                                android:translationX="-87dp" />
 
-                            <TextView
-                                android:id="@+id/textView4K"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:paddingBottom="20dp"
-                                android:text="4K" />
+                                android:layout_height="30dp"
+                                android:track="@drawable/switch_track_selector"
+                                android:thumb="@drawable/switch_thumb"
+                                android:layout_marginBottom="5dp"
+                                />
                         </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardView6"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="15dp"
+                        app:cardUseCompatPadding="true">
+
 
                         <LinearLayout
                             android:layout_width="25dp"
@@ -373,21 +383,31 @@
                                 android:id="@+id/textView9"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:gravity="center"
 
-                                android:paddingTop="20dp"
-                                android:text="0" />
+                                app:cs_circle_style = "round"
+                                app:cs_progress = "20"
+                                app:cs_max = "100"
+                                app:cs_negative_enabled = "false"
+                                app:cs_move_outside_circle = "true"
+                                app:cs_maintain_equal_circle = "true"
+                                app:cs_use_custom_radii = "false"
+                                app:cs_circle_x_radius = "0dp"
+                                app:cs_circle_y_radius = "0dp"
+                                app:cs_circle_stroke_width = "5dp"
+                                app:cs_disable_pointer = "false"
+                                app:cs_pointer_stroke_width = "10dp"
+                                app:cs_pointer_halo_width = "5dp"
+                                app:cs_pointer_halo_border_width = "5dp"
+                                app:cs_circle_fill = "@color/white"
+                                app:cs_circle_color = "@color/gray"
+                                app:cs_circle_progress_color = "@color/midnight_blue"
+                                app:cs_pointer_color = "@color/midnight_blue"
+                                app:cs_pointer_alpha_ontouch = "5"
+                                app:cs_pointer_angle = "0"
+                                app:cs_disable_progress_glow = "true"
+                                app:cs_hide_progress_when_empty = "false"
+                                />
 
-                            <SeekBar
-                                android:id="@+id/seekBar9"
-                                android:layout_width="200dp"
-                                android:layout_height="200dp"
-                                android:max="30"
-                                android:progress="15"
-                                android:rotation="270"
-                                android:splitTrack="true"
-                                android:translationX="-87dp" />
 
                             <TextView
                                 android:id="@+id/textView8K"
@@ -428,41 +448,14 @@
                             <TextView
                                 android:id="@+id/textView16K"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:paddingBottom="20dp"
-                                android:text="16K" />
+
+                                android:layout_height="30dp"
+                                android:track="@drawable/switch_track_selector"
+                                android:thumb="@drawable/switch_thumb"
+                                android:layout_marginBottom="5dp"
+                                />
                         </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp">
-
-                        <TextView
-                            android:id="@+id/textViewPreset"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="preset"
-                            android:textColor="@color/white" />
-
-                        <Spinner
-                            android:id="@+id/spinner1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end"
-                            android:layout_weight="1"
-
-                            android:gravity="center_horizontal" />
-                    </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
