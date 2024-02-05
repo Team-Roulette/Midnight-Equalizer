@@ -17,22 +17,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"
+        android:layout_marginHorizontal="20dp"
         android:orientation="vertical"
-        android:gravity="fill"
-        >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        android:gravity="fill">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:cardCornerRadius="15dp"
-                app:cardElevation="10dp"
+                app:cardElevation="1dp"
                 app:strokeColor="@color/white"
                 android:backgroundTint="@color/midnight_blue"
 
@@ -44,7 +38,6 @@
                     android:layout_height="match_parent"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
-                    android:layout_marginBottom="20dp"
                     android:orientation="vertical">
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -461,7 +454,7 @@
                             android:gravity="center_horizontal"
                             android:layout_width="40dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1" />
+                            android:layout_weight="2" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -498,6 +491,7 @@
                             app:cs_move_outside_circle = "true"
                             app:cs_maintain_equal_circle = "true"
                             app:cs_use_custom_radii = "false"
+
 
                             app:cs_circle_x_radius = "0dp"
                             app:cs_circle_y_radius = "0dp"
@@ -662,7 +656,5 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
-        </LinearLayout>
-
     </LinearLayout>
 </LinearLayout>
