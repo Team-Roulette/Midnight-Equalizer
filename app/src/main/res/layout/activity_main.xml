@@ -25,11 +25,11 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:cardCornerRadius="15dp"
-                    app:cardElevation="10dp"
-                    app:strokeColor="@color/white"
+                    app:cardElevation="10dp"                    app:strokeColor="@color/white"
                     android:backgroundTint="@color/midnight_blue"
+                    app:strokeWidth="2dp"
+                    android:layout_margin="6dp"
 
-                    app:cardUseCompatPadding="true"
                     android:id="@+id/cardView3">
 
                     <LinearLayout
@@ -463,6 +463,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
                     <com.google.android.material.card.MaterialCardView
@@ -535,6 +536,7 @@
                         android:backgroundTint="@color/midnight_blue"
                         android:orientation="vertical"
                         android:layout_weight="1"
+                        app:strokeWidth="2dp"
                         app:cardCornerRadius="15dp"
                         app:cardUseCompatPadding="true">
 
