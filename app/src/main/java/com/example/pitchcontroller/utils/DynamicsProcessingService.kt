@@ -1,17 +1,11 @@
 package com.example.pitchcontroller.utils
 
-import android.content.Context
 import android.media.AudioManager
-import android.media.MediaPlayer
 import android.media.audiofx.BassBoost
 import android.media.audiofx.DynamicsProcessing
 import android.media.audiofx.LoudnessEnhancer
 import android.media.audiofx.Virtualizer
 import android.util.Log
-import androidx.annotation.RawRes
-import com.example.pitchcontroller.AudioController.init
-import com.example.pitchcontroller.models.Frequencies
-import com.example.pitchcontroller.models.presets
 
 private const val TAG = "DynamicAudioProcessor"
 

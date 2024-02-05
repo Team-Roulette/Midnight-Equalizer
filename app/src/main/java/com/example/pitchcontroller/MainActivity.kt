@@ -1,7 +1,10 @@
 package com.example.pitchcontroller
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.PorterDuff
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,21 +12,17 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SeekBar
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.pitchcontroller.databinding.ActivityMainBinding
 import com.example.pitchcontroller.models.presetList
 import com.example.pitchcontroller.models.presets
 import com.example.pitchcontroller.utils.DynamicsProcessingService
-import me.tankery.lib.circularseekbar.CircularSeekBar
-import android.content.Intent
-import android.graphics.PorterDuff
-
-import android.os.Build
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
 import com.example.pitchcontroller.utils.ForegroundService
+import me.tankery.lib.circularseekbar.CircularSeekBar
 
 private const val TAG = "MainActivity"
 private const val MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1
@@ -41,11 +40,11 @@ class MainActivity : AppCompatActivity() {
         android.Manifest.permission.RECORD_AUDIO,
     )
     private val multiplePermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){
-            val resultPermission = it.all{map ->
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+            val resultPermission = it.all { map ->
                 map.value
             }
-            if(!resultPermission){
+            if (!resultPermission) {
                 Toast.makeText(this, "모든 권한 승인되어야 함", Toast.LENGTH_SHORT).show()
             }
         }
@@ -66,10 +65,16 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun checkPermissions() {
         Log.i("test", "checkPermissions")
-        if (!permissions.all { checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED }) multiplePermissionLauncher.launch(permissions)
+        if (!permissions.all { checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED }) multiplePermissionLauncher.launch(
+            permissions
+        )
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         Log.i("test", "onRequestPermissionsResult")
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
@@ -99,7 +104,6 @@ class MainActivity : AppCompatActivity() {
         setSwitch()
         setSeekBar()
         setSpinner()
-        setGauge()
     }
 
     private fun setSwitch() {
@@ -110,14 +114,32 @@ class MainActivity : AppCompatActivity() {
 
             switch2.setOnCheckedChangeListener { _, isChecked ->
                 audioPlayer?.setBassBoostEnabled(isChecked)
-            }
 
-            switch3.setOnCheckedChangeListener { _, isChecked ->
-                audioPlayer?.setVirtualizerEnable(isChecked)
+                if (isChecked) {
+                    setSeekBarEnabled({ audioPlayer?.setBassBoostStrength(it) }, seekbarBaseboost)
+                } else {
+                    setSeekBarDisabled(seekbarBaseboost)
+                }
             }
 
             switch4.setOnCheckedChangeListener { _, isChecked ->
+                audioPlayer?.setVirtualizerEnable(isChecked)
+
+                if (isChecked) {
+                    setSeekBarEnabled({ audioPlayer?.setVirtualizerStrength(it) }, seekbarVirtualizer)
+                } else {
+                    setSeekBarDisabled(seekbarVirtualizer)
+                }
+            }
+
+            switch3.setOnCheckedChangeListener { _, isChecked ->
                 audioPlayer?.setLoudnessEnhancerEnabled(isChecked)
+
+                if (isChecked) {
+                    setSeekBarEnabled({ audioPlayer?.setLoudnessEnhancerStrength(it) }, seekbarLoudness)
+                } else {
+                    setSeekBarDisabled(seekbarLoudness)
+                }
             }
         }
     }
@@ -159,9 +181,9 @@ class MainActivity : AppCompatActivity() {
                 textView4K,
                 textView8K,
                 textView16K,
-                )
-            frequencies.forEach{textView ->
-                textView.setTextColor(ContextCompat.getColor(this@MainActivity,R.color.white))
+            )
+            frequencies.forEach { textView ->
+                textView.setTextColor(ContextCompat.getColor(this@MainActivity, R.color.white))
             }
 
             gains.forEach { textView ->
@@ -191,9 +213,11 @@ class MainActivity : AppCompatActivity() {
                         audioPlayer?.setEqualizerGainByIndex(index, num.toFloat())
                         gains[index].text = num.toString()
                     }
+
                     override fun onStartTrackingTouch(seekBar: SeekBar?) {
                         // 사용자가 터치를 시작할 때의 로직을 여기에 작성합니다.
                     }
+
                     override fun onStopTrackingTouch(seekBar: SeekBar?) {
                         // 터치를 멈췄을 때의 로직을 여기에 작성합니다.
                     }
@@ -214,9 +238,9 @@ class MainActivity : AppCompatActivity() {
         binding.spinner1.adapter = adapter
         binding.spinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    presets[p2].map.toList().forEachIndexed { index, pair ->
-                        seekBars[index].progress = pair.second.toInt() + 15
-                    }
+                presets[p2].map.toList().forEachIndexed { index, pair ->
+                    seekBars[index].progress = pair.second.toInt() + 15
+                }
 
             }
 
@@ -227,9 +251,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setGauge() {
+    private fun setGauge(method: (strength: Int) -> Unit, view: CircularSeekBar) {
         binding.apply {
-            val unitArr = arrayOf<(strength:Int) -> Unit>(
+            val unitArr = arrayOf<(strength: Int) -> Unit>(
                 {
                     audioPlayer?.setBassBoostStrength(it)
                 }, {
@@ -263,5 +287,48 @@ class MainActivity : AppCompatActivity() {
                 })
             }
         }
+    }
+
+    private fun setSeekBarEnabled(method: (strength: Int) -> Unit, view: CircularSeekBar) {
+
+        view.setOnSeekBarChangeListener(object :
+            CircularSeekBar.OnCircularSeekBarChangeListener {
+            override fun onProgressChanged(
+                circularSeekBar: CircularSeekBar?,
+                progress: Float,
+                fromUser: Boolean
+            ) {
+                method(progress.toInt())
+                Log.d(TAG, progress.toString())
+            }
+
+            override fun onStartTrackingTouch(seekBar: CircularSeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: CircularSeekBar?) {}
+
+        })
+    }
+
+
+    private fun setSeekBarDisabled(view: CircularSeekBar) {
+        view.setOnSeekBarChangeListener(object :
+            CircularSeekBar.OnCircularSeekBarChangeListener {
+            override fun onProgressChanged(
+                circularSeekBar: CircularSeekBar?,
+                progress: Float,
+                fromUser: Boolean
+            ) {
+                return
+            }
+
+            override fun onStartTrackingTouch(seekBar: CircularSeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(seekBar: CircularSeekBar?) {}
+
+        })
+
     }
 }
