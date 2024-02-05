@@ -9,12 +9,19 @@ import android.media.audiofx.LoudnessEnhancer
 import android.media.audiofx.Virtualizer
 import android.util.Log
 import androidx.annotation.RawRes
+import com.example.pitchcontroller.AudioController.init
 import com.example.pitchcontroller.models.Frequencies
 import com.example.pitchcontroller.models.presets
 
 private const val TAG = "DynamicAudioProcessor"
 
+data class Gain(
+    var curGain: Float = 0f,
+    var savedGain: Float = 0f
+)
+
 class DynamicsProcessingService {
+
 
     private val centerFrequency = arrayListOf(
         31F, 62F, 125F, 250F, 500F, 1000F, 2000F, 4000F, 8000F, 16000F, 20000F
@@ -26,14 +33,21 @@ class DynamicsProcessingService {
     private val mbcInUse = true
     private val mbcBandCount = 0
     private val postEqInUse = true
-    private val postEqBandCount = 0
-    private val limiterInUse = true
+    private val postEqBandCount = 10
+    private val limiterInUse = false
 
     private var dynamicsProcessing: DynamicsProcessing? = null
     private var bassBoost: BassBoost? = null
     private var virtualizer: Virtualizer? = null
     private var loudnessEnhancer: LoudnessEnhancer? = null
 
+
+
+    private val equalizerGains = mutableListOf<Float>(
+        0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F
+    )
+    private var bassBoostGain = Gain()
+    private var loudnessGain = Gain()
 
     init {
         val audioSessionId = AudioManager.AUDIO_SESSION_ID_GENERATE
@@ -45,6 +59,7 @@ class DynamicsProcessingService {
         ).build()
 
         dynamicsProcessing = DynamicsProcessing(0, audioSessionId, config)
+
         bassBoost = BassBoost(2, audioSessionId)
         val mode = Virtualizer.VIRTUALIZATION_MODE_BINAURAL
         virtualizer?.forceVirtualizationMode(mode)
@@ -56,7 +71,7 @@ class DynamicsProcessingService {
                 i,
                 DynamicsProcessing.EqBand(
                     true,
-                    (centerFrequency[i] + centerFrequency[i + 1]) / 2,
+                    getCufOffFrequency(i),
                     0F
                 )
             )
@@ -65,34 +80,103 @@ class DynamicsProcessingService {
                 i,
                 DynamicsProcessing.EqBand(
                     true,
-                    (centerFrequency[i] + centerFrequency[i + 1]) / 2,
+                    getCufOffFrequency(i),
                     0F
+                )
+            )
+        }
+        dynamicsProcessing?.enabled = true
+    }
+
+    /*Equalizer Methods*/
+    fun setEqualizerEnabled(setting: Boolean) {
+        val gain = mutableListOf<Float>()
+        if(!setting) {
+            gain.addAll(listOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f))
+        } else {
+            for(i in 0..9){
+                gain.addAll(equalizerGains)
+            }
+        }
+
+        for(i in 0..9) {
+            dynamicsProcessing?.setPreEqBandAllChannelsTo(
+                i,
+                DynamicsProcessing.EqBand(
+                    true,
+                    getCufOffFrequency(i),
+                    gain[i]
                 )
             )
         }
     }
 
-    /*Equalizer Methods*/
-    fun setEqualizerEnabled(setting: Boolean) {
-        dynamicsProcessing?.enabled = setting
-    }
-
     fun setEqualizerGainByIndex(index: Int, gain: Float) {
         dynamicsProcessing?.setPreEqBandAllChannelsTo(
             index,
-            DynamicsProcessing.EqBand(true, centerFrequency[index], gain)
+            DynamicsProcessing.EqBand(
+                true,
+                getCufOffFrequency(index),
+                gain
+            )
         )
+        equalizerGains[index] = gain
     }
 
+
     /*Bass Boost Methods*/
-    fun setBassBoostEnable(setting: Boolean) {
-        bassBoost?.enabled = setting
+    fun setBassBoostEnabled(setting: Boolean) {
+        bassBoostGain.curGain =
+            if(setting) bassBoostGain.savedGain
+            else 0f
+
+        setPostEqStrength()
     }
 
     fun setBassBoostStrength(strength: Int) {
-        val num = strength * 10
-        bassBoost?.setStrength(num.toShort())
+        bassBoostGain.savedGain = strength.toFloat() * 15 / 100
+        bassBoostGain.curGain = bassBoostGain.savedGain
+        setPostEqStrength()
     }
+
+    /*Loudness Methods*/
+    fun setLoudnessEnhancerEnabled(setting: Boolean) {
+        loudnessGain.curGain =
+            if(setting) loudnessGain.savedGain
+            else 0f
+
+        setPostEqStrength()
+    }
+
+    fun setLoudnessEnhancerStrength(strength: Int) {
+        loudnessGain.savedGain  = strength.toFloat() * 15 / 100
+
+        loudnessGain.curGain = loudnessGain.savedGain
+        setPostEqStrength()
+    }
+
+    private fun setPostEqStrength(
+        bassBoost:Float = bassBoostGain.curGain,
+        loudness:Float = loudnessGain.curGain) {
+        for(index in 0..9){
+            var gain = loudness
+
+            if(index <= 1){
+                gain += bassBoost
+            }
+
+            dynamicsProcessing?.setPostEqBandAllChannelsTo(
+                index,
+                DynamicsProcessing.EqBand(true, getCufOffFrequency(index), gain)
+            )
+        }
+    }
+
+    fun getCufOffFrequency(index: Int): Float {
+        return centerFrequency[index] + centerFrequency[index + 1] /2
+    }
+
+
 
     /*Virtualizer Methods*/
     fun setVirtualizerEnable(setting: Boolean) {
@@ -103,16 +187,8 @@ class DynamicsProcessingService {
         val num = strength * 10
         virtualizer?.setStrength(num.toShort())
 
+
         Log.d(TAG, virtualizer?.roundedStrength.toString())
     }
 
-
-    /*Loudness Methods*/
-    fun setLoudnessEnhancerEnable(setting: Boolean) {
-        loudnessEnhancer?.enabled = setting
-    }
-
-    fun setLoudnessEnhancerStrength(strength: Int) {
-        loudnessEnhancer?.setTargetGain(strength)
-    }
 }
