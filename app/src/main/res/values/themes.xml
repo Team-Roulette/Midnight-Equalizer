@@ -2,8 +2,11 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.PitchController" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">@color/midnight_blue</item>
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
     <style name="Theme.PitchController" parent="Base.Theme.PitchController" />
+
 </resources>

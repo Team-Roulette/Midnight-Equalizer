@@ -57,13 +57,13 @@
 
                             <Switch
                                 android:id="@+id/switch1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="20dp"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
                                 android:layout_weight="1"
                                 android:track="@drawable/switch_track_selector"
                                 android:thumb="@drawable/switch_thumb"
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
+
+
                                 />
                         </LinearLayout>
                         <LinearLayout
@@ -452,9 +452,8 @@
                                 android:id="@+id/spinner1"
                                 android:layout_gravity="end"
                                 android:gravity="center_horizontal"
-                                android:layout_width="wrap_content"
+                                android:layout_width="40dp"
                                 android:layout_height="wrap_content"
-
                                 android:layout_weight="1" />
                         </LinearLayout>
 
@@ -466,11 +465,12 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cardView4"
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
-                        app:cardBackgroundColor="@color/white"
+                        android:backgroundTint="@color/white"
+                        app:strokeWidth="2dp"
                         android:orientation="vertical"
                         android:layout_weight="1"
                         app:cardCornerRadius="15dp"
@@ -521,10 +521,13 @@
                                 android:id="@+id/switch2"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="30dp"
+                                android:track="@drawable/switch_track_selector"
+                                android:thumb="@drawable/switch_thumb"
+                                android:layout_marginBottom="5dp"
                                 />
                         </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cardView5"
                         android:layout_width="40dp"
@@ -582,16 +585,19 @@
                                 android:id="@+id/switch3"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_width="wrap_content"
-                                
-                                android:layout_height="wrap_content"
+
+                                android:layout_height="30dp"
+                                android:track="@drawable/switch_track_selector"
+                                android:thumb="@drawable/switch_thumb"
+                                android:layout_marginBottom="5dp"
                                 />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cardView6"
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
-
+                        android:backgroundTint="@color/white"
                         android:orientation="vertical"
                         android:layout_weight="1"
                         app:cardCornerRadius="15dp"
@@ -612,7 +618,6 @@
                                 app:cs_move_outside_circle = "true"
                                 app:cs_maintain_equal_circle = "true"
                                 app:cs_use_custom_radii = "false"
-
                                 app:cs_circle_x_radius = "0dp"
                                 app:cs_circle_y_radius = "0dp"
                                 app:cs_circle_stroke_width = "5dp"
@@ -624,7 +629,6 @@
                                 app:cs_circle_color = "@color/gray"
                                 app:cs_circle_progress_color = "@color/midnight_blue"
                                 app:cs_pointer_color = "@color/midnight_blue"
-
                                 app:cs_pointer_alpha_ontouch = "5"
                                 app:cs_pointer_angle = "0"
                                 app:cs_disable_progress_glow = "true"
@@ -643,10 +647,13 @@
                                 android:id="@+id/switch4"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="30dp"
+                                android:track="@drawable/switch_track_selector"
+                                android:thumb="@drawable/switch_thumb"
+                                android:layout_marginBottom="5dp"
                                 />
                         </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
             </LinearLayout>
 
