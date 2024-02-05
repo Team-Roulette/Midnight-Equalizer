@@ -1,6 +1,7 @@
 package com.example.pitchcontroller
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -38,6 +39,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var frequencies: List<TextView>
     private lateinit var visualizer: Visualizer
     private lateinit var waveformView: WaveformView
+    private lateinit var audioManager: AudioManager
+    private var currentVolume = 0
+    private var isNotMuted = true
 
     private lateinit var binding: ActivityMainBinding
     private val mainViewModel: MainViewModel by viewModels()
@@ -92,6 +96,23 @@ class MainActivity : AppCompatActivity() {
             // 다른 'case' 라인을 여기에 추가할 수 있습니다.
         }
     }
+
+    @SuppressLint("ResourceType")
+    private fun init() {
+
+
+        Log.i("test", "init")
+        val serviceIntent = Intent(this, ForegroundService::class.java)
+        startForegroundService(serviceIntent)
+
+        initVisualizer()
+        initAudioManager()
+
+        setSwitch()
+        setSeekBar()
+        setSpinner()
+    }
+
     private fun initVisualizer() {
         waveformView = binding.waveformView
         visualizer = Visualizer(audioSessionId).apply {
@@ -111,20 +132,12 @@ class MainActivity : AppCompatActivity() {
         visualizer.enabled = true // Visualizer 시작
     }
 
-    @SuppressLint("ResourceType")
-    private fun init() {
-
-
-        Log.i("test", "init")
-        val serviceIntent = Intent(this, ForegroundService::class.java)
-        startForegroundService(serviceIntent)
-
-        initVisualizer()
-
-        setSwitch()
-        setSeekBar()
-        setSpinner()
+    private fun initAudioManager() {
+        audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+        Log.d(TAG, audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toString())
     }
+
 
     private fun setSwitch() {
 
@@ -142,6 +155,12 @@ class MainActivity : AppCompatActivity() {
             }
 
             switch4.setOnCheckedChangeListener { _, isChecked ->
+                isNotMuted = isChecked
+                if(isNotMuted){
+                    audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, AudioManager.FLAG_SHOW_UI)
+                } else {
+                    audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, AudioManager.FLAG_SHOW_UI)
+                }
             }
         }
     }
@@ -195,6 +214,20 @@ class MainActivity : AppCompatActivity() {
 
             setSeekBarEnabled({ mainViewModel.setBassBoostStrength(it) }, seekbarBaseboost)
             setSeekBarEnabled({ mainViewModel.setLoudnessStrength(it) }, seekbarLoudness)
+            seekbarVirtualizer.setOnSeekBarChangeListener(object :
+                CircularSeekBar.OnCircularSeekBarChangeListener {
+                override fun onProgressChanged(
+                    circularSeekBar: CircularSeekBar?,
+                    progress: Float,
+                    fromUser: Boolean
+                ) {
+                    if(isNotMuted)
+                        currentVolume = (progress * 15 / 100).toInt()
+                        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, AudioManager.FLAG_SHOW_UI)
+                }
+                override fun onStartTrackingTouch(seekBar: CircularSeekBar?) {}
+                override fun onStopTrackingTouch(seekBar: CircularSeekBar?) {}
+            })
 
 
             // SeekBar의 진행 막대와 썸 색상을 변경합니다.
