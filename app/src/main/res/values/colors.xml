@@ -4,5 +4,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="indigo">#FF123456</color>
     <color name="purple">#FF823194</color>
+    <color name="midnight">#2B1B17</color>
+    <color name="midnight_blue">#151B54</color>
+    <color name="dark_slate_blue">#2B3856</color>
     <color name="gray">#55555555</color>
+    <color name="purple_monster">#461B7E</color>
+    <color name="dull_Purple">#7F525D</color>
+
 </resources>

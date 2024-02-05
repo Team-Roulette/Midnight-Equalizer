@@ -20,6 +20,7 @@ import com.example.pitchcontroller.utils.DynamicsProcessingService
 import me.tankery.lib.circularseekbar.CircularSeekBar
 import android.content.Context
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.media.AudioAttributes
 import android.media.AudioFormat
 import android.media.AudioPlaybackCaptureConfiguration
@@ -39,7 +40,8 @@ class MainActivity : AppCompatActivity() {
     private val REQUEST_RECORD_AUDIO_PERMISSION = 200
 
     lateinit var seekBars: List<SeekBar>
-    lateinit var textViews: List<TextView>
+    lateinit var gains: List<TextView>
+    lateinit var frequencies:List<TextView>
 
     var audioPlayer: DynamicsProcessingService? = null
   
@@ -80,13 +82,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        checkPermissions()
-        init()
 
         audioPlayer = DynamicsProcessingService()
         //audioPlayer?.mediaPlayer?.start()
-
         binding = ActivityMainBinding.inflate(layoutInflater)
+        checkPermissions()
+        init()
         setContentView(binding.root)
         initLayout()
 
@@ -252,7 +253,7 @@ class MainActivity : AppCompatActivity() {
                 seekBar9,
                 seekBar10
             )
-            textViews = listOf(
+            gains = listOf(
                 textView1,
                 textView2,
                 textView3,
@@ -264,6 +265,38 @@ class MainActivity : AppCompatActivity() {
                 textView9,
                 textView10,
             )
+            frequencies = listOf(
+                textView31,
+                textView62,
+                textView125,
+                textView250,
+                textView500,
+                textView1k,
+                textView2K,
+                textView4K,
+                textView8K,
+                textView16K,
+                )
+            frequencies.forEach{textView ->
+                textView.setTextColor(ContextCompat.getColor(this@MainActivity,R.color.white))
+            }
+
+            gains.forEach { textView ->
+                textView.setTextColor(ContextCompat.getColor(this@MainActivity, R.color.white))
+            }
+            // SeekBar의 진행 막대와 썸 색상을 변경합니다.
+            seekBars.forEach { seekBar ->
+                // 진행 막대 색상 변경
+                seekBar.progressDrawable.setColorFilter(
+                    ContextCompat.getColor(this@MainActivity, R.color.white),
+                    PorterDuff.Mode.SRC_IN
+                )
+                // 썸 색상 변경
+                seekBar.thumb.setColorFilter(
+                    ContextCompat.getColor(this@MainActivity, R.color.white),
+                    PorterDuff.Mode.SRC_IN
+                )
+            }
             seekBars.forEachIndexed { index, seekBar ->
                 seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                     override fun onProgressChanged(
@@ -273,13 +306,11 @@ class MainActivity : AppCompatActivity() {
                     ) {
                         val num = progress - 15
                         audioPlayer?.setEqualizerGainByIndex(index, num.toFloat())
-                        textViews[index].text = num.toString()
+                        gains[index].text = num.toString()
                     }
-
                     override fun onStartTrackingTouch(seekBar: SeekBar?) {
                         // 사용자가 터치를 시작할 때의 로직을 여기에 작성합니다.
                     }
-
                     override fun onStopTrackingTouch(seekBar: SeekBar?) {
                         // 터치를 멈췄을 때의 로직을 여기에 작성합니다.
                     }
@@ -289,12 +320,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setSpinner() {
+
         val adapter = ArrayAdapter(
             this,
-            com.google.android.material.R.layout.support_simple_spinner_dropdown_item,
+            R.layout.row_spinner,
             presetList
         )
-
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         binding.spinner1.adapter = adapter
         binding.spinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
