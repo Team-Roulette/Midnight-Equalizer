@@ -22,14 +22,18 @@ import android.media.AudioManager
 
 import android.media.audiofx.Visualizer
 import android.net.Uri
+import android.os.Build
 import android.os.PersistableBundle
 import android.provider.Settings
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.ContextCompat.startActivity
 import com.example.pitchcontroller.utils.ForegroundService
 import com.example.pitchcontroller.views.viewmodels.MainViewModel
 import com.example.pitchcontroller.views.WaveformView
@@ -52,43 +56,50 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val mainViewModel: MainViewModel by viewModels()
     private var audioSessionId = 0
-    private val permissions = arrayOf(
-        android.Manifest.permission.POST_NOTIFICATIONS,
-        android.Manifest.permission.READ_MEDIA_AUDIO,
-        android.Manifest.permission.RECORD_AUDIO
-    )
-    private val multiplePermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){
-            Log.i("test", "multiplePermissionLauncher.launch")
-            val resultPermission = it.all{map ->
-                map.value
+    private val permissions =
+        when(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            true -> arrayOf(
+                android.Manifest.permission.POST_NOTIFICATIONS,
+                android.Manifest.permission.READ_MEDIA_AUDIO,
+                android.Manifest.permission.RECORD_AUDIO
+            )
+            false -> arrayOf(
+                android.Manifest.permission.RECORD_AUDIO
+            )
+        }
+        private val multiplePermissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){
+                Log.i("test", "multiplePermissionLauncher.launch")
+                val resultPermission = it.all{map ->
+                    map.value
+                }
+                if(!resultPermission){
+                    Toast.makeText(this, "All Permissions must be allowed!", Toast.LENGTH_SHORT).show()
+                    permissionCheckAlertDialog()
+                }
+                else init()
             }
-            if(!resultPermission){
-                Toast.makeText(this, "All Permissions must be allowed!", Toast.LENGTH_SHORT).show()
-                permissionCheckAlertDialog()
-            }
-            else init()
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            binding = ActivityMainBinding.inflate(layoutInflater)
+            checkPermissions()
+            setContentView(binding.root)
         }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        checkPermissions()
-        setContentView(binding.root)
-    }
+        private fun checkPermissions() {
+            Log.i("test", "checkPermissions")
+            when {
+                (permissions.all { checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED }) -> { Log.i("test", "permission check O"); init() }
+                (ActivityCompat.shouldShowRequestPermissionRationale (this, android.Manifest.permission.POST_NOTIFICATIONS)
+                || ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_MEDIA_AUDIO)
+                || ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.RECORD_AUDIO)) ->
+                    {Log.i("test", "permission check X");permissionCheckAlertDialog()}
+                else -> {Log.i("test", "else");multiplePermissionLauncher.launch(permissions)}
 
-    private fun checkPermissions() {
-        Log.i("test", "checkPermissions")
-        when {
-            (permissions.all { checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED }) -> { Log.i("test", "permission check O"); init() }
-            (ActivityCompat.shouldShowRequestPermissionRationale (this, android.Manifest.permission.POST_NOTIFICATIONS)
-            || ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_MEDIA_AUDIO)
-            || ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.RECORD_AUDIO)) ->
-                {Log.i("test", "permission check X");permissionCheckAlertDialog()}
-            else -> {Log.i("test", "else");multiplePermissionLauncher.launch(permissions)}
-
+            }
         }
-    }
+
 
     fun permissionCheckAlertDialog(){
         Log.i("test", "permissionCheckAlertDialog")
