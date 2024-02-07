@@ -29,7 +29,6 @@
                 app:cardElevation="1dp"
                 app:strokeColor="@color/white"
                 android:backgroundTint="@color/midnight_blue"
-
                 app:cardUseCompatPadding="true"
                 android:id="@+id/cardView3">
 
