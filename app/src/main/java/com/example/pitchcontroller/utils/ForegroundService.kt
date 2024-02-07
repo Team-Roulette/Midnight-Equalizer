@@ -41,7 +41,7 @@ class ForegroundService() : Service() {
 
         val notificationBuilder = NotificationCompat.Builder(this, notificationChannelId)
         val notification = notificationBuilder.setOngoing(true)
-            .setSmallIcon(R.mipmap.ic_launcher)
+            .setSmallIcon(R.mipmap.ic_main_round)
             .setContentTitle("피컨")
             .setContentText("음정 조절 앱 테스트 중")
             .setContentIntent(pendingIntent)
