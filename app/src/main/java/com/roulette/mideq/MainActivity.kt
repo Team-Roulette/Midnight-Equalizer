@@ -1,7 +1,7 @@
-package com.example.pitchcontroller
+package com.roulette.mideq
 
+import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -11,10 +11,9 @@ import android.widget.ArrayAdapter
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.pitchcontroller.databinding.ActivityMainBinding
-import com.example.pitchcontroller.repositories.presetList
-import com.example.pitchcontroller.repositories.presets
-import com.example.pitchcontroller.utils.DynamicsProcessingService
+import com.roulette.mideq.databinding.ActivityMainBinding
+import com.roulette.mideq.repositories.presetList
+import com.roulette.mideq.repositories.presets
 import me.tankery.lib.circularseekbar.CircularSeekBar
 import android.content.Intent
 import android.graphics.PorterDuff
@@ -23,20 +22,16 @@ import android.media.AudioManager
 import android.media.audiofx.Visualizer
 import android.net.Uri
 import android.os.Build
-import android.os.PersistableBundle
 import android.provider.Settings
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.content.ContextCompat.startActivity
-import com.example.pitchcontroller.utils.ForegroundService
-import com.example.pitchcontroller.views.viewmodels.MainViewModel
-import com.example.pitchcontroller.views.WaveformView
+import com.roulette.mideq.utils.ForegroundService
+import com.roulette.mideq.views.viewmodels.MainViewModel
+import com.roulette.mideq.views.WaveformView
 
 private const val TAG = "MainActivity"
 private const val MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1
@@ -59,12 +54,12 @@ class MainActivity : AppCompatActivity() {
     private val permissions =
         when(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             true -> arrayOf(
-                android.Manifest.permission.POST_NOTIFICATIONS,
-                android.Manifest.permission.READ_MEDIA_AUDIO,
-                android.Manifest.permission.RECORD_AUDIO
+                Manifest.permission.POST_NOTIFICATIONS,
+                Manifest.permission.READ_MEDIA_AUDIO,
+                Manifest.permission.RECORD_AUDIO
             )
             false -> arrayOf(
-                android.Manifest.permission.RECORD_AUDIO
+                Manifest.permission.RECORD_AUDIO
             )
         }
         private val multiplePermissionLauncher =
@@ -91,9 +86,9 @@ class MainActivity : AppCompatActivity() {
             Log.i("test", "checkPermissions")
             when {
                 (permissions.all { checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED }) -> init()
-                (ActivityCompat.shouldShowRequestPermissionRationale (this, android.Manifest.permission.POST_NOTIFICATIONS)
-                || ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_MEDIA_AUDIO)
-                || ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.RECORD_AUDIO)) -> permissionCheckAlertDialog()
+                (ActivityCompat.shouldShowRequestPermissionRationale (this, Manifest.permission.POST_NOTIFICATIONS)
+                || ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_MEDIA_AUDIO)
+                || ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO)) -> permissionCheckAlertDialog()
                 else -> multiplePermissionLauncher.launch(permissions)
 
             }
@@ -175,7 +170,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initAudioManager() {
-        audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
         currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
         Log.d(TAG, audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toString())
     }
@@ -246,7 +241,7 @@ class MainActivity : AppCompatActivity() {
                 textView16K,
                 )
             frequencies.forEach{textView ->
-                textView.setTextColor(ContextCompat.getColor(this@MainActivity,R.color.white))
+                textView.setTextColor(ContextCompat.getColor(this@MainActivity, R.color.white))
             }
 
             gains.forEach { textView ->
@@ -263,9 +258,14 @@ class MainActivity : AppCompatActivity() {
                     progress: Float,
                     fromUser: Boolean
                 ) {
-                    if(isNotMuted)
+                    if(isNotMuted) {
                         currentVolume = (progress * 15 / 100).toInt()
-                        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, AudioManager.FLAG_SHOW_UI)
+                        audioManager.setStreamVolume(
+                            AudioManager.STREAM_MUSIC,
+                            currentVolume,
+                            AudioManager.FLAG_SHOW_UI
+                        )
+                    }
                 }
                 override fun onStartTrackingTouch(seekBar: CircularSeekBar?) {}
                 override fun onStopTrackingTouch(seekBar: CircularSeekBar?) {}

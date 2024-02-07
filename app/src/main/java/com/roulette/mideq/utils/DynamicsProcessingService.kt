@@ -1,4 +1,4 @@
-package com.example.pitchcontroller.utils
+package com.roulette.mideq.utils
 
 import android.media.audiofx.DynamicsProcessing
 

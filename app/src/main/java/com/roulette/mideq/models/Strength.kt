@@ -1,4 +1,4 @@
-package com.example.pitchcontroller.models
+package com.roulette.mideq.models
 
 data class Strength(
     var currentStrength: Float = 0f,

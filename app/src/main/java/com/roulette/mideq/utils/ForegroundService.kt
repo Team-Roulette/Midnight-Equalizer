@@ -1,4 +1,4 @@
-package com.example.pitchcontroller.utils
+package com.roulette.mideq.utils
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -9,8 +9,8 @@ import android.content.Intent
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.example.pitchcontroller.MainActivity
-import com.example.pitchcontroller.R
+import com.roulette.mideq.MainActivity
+import com.roulette.mideq.R
 
 class ForegroundService() : Service() {
 

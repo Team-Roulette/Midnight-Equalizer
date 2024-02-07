@@ -1,4 +1,4 @@
-package com.example.pitchcontroller.models
+package com.roulette.mideq.models
 
 import androidx.annotation.StringRes
 

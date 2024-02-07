@@ -1,4 +1,4 @@
-package com.example.pitchcontroller
+package com.roulette.mideq
 
 import org.junit.Test
 

@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.pitchcontroller"
+    namespace = "com.roulette.mideq"
     compileSdk = 34
 
     buildFeatures{
@@ -12,7 +12,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.pitchcontroller"
+        applicationId = "com.roulette.mideq"
         minSdk = 30
         targetSdk = 34
         versionCode = 1

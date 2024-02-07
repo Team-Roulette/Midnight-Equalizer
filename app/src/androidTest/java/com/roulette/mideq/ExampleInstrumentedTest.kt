@@ -1,4 +1,4 @@
-package com.example.pitchcontroller
+package com.roulette.mideq
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

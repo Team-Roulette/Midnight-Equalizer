@@ -1,4 +1,4 @@
-package com.example.pitchcontroller.views
+package com.roulette.mideq.views
 
 import android.content.Context
 import android.graphics.Canvas

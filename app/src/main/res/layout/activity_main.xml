@@ -1,43 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/midnight_blue"
-    android:orientation="vertical"
-    app:cardUseCompatPadding="true">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <com.example.pitchcontroller.views.WaveformView
-        android:id="@+id/waveformView"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="20dp"
-        android:hardwareAccelerated="true" />
-
-    <LinearLayout
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="20dp"
+        android:background="@color/midnight_blue"
         android:orientation="vertical"
-        android:gravity="fill">
+        app:cardUseCompatPadding="true">
+
+        <com.roulette.mideq.views.WaveformView
+            android:id="@+id/waveformView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="20dp"
+            android:hardwareAccelerated="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="20dp"
+            android:gravity="fill"
+            android:orientation="vertical">
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/midnight_blue"
                 android:orientation="vertical"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="1dp"
-                app:strokeColor="@color/white"
-                android:backgroundTint="@color/midnight_blue"
                 app:cardUseCompatPadding="true"
-                android:id="@+id/cardView3">
+                app:strokeColor="@color/white">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:orientation="vertical"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:orientation="vertical">
+                    android:paddingBottom="10dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -49,22 +54,23 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="20dp"
-                            android:textStyle="bold"
+                            android:text="Equalizer"
                             android:textColor="@color/white"
-                            android:text="Equalizer" />
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
 
                         <Switch
                             android:id="@+id/switch1"
                             android:layout_width="10dp"
                             android:layout_height="10dp"
                             android:layout_weight="1"
-                            android:track="@drawable/switch_track_selector"
                             android:thumb="@drawable/switch_thumb"
+                            android:track="@drawable/switch_track_selector"
 
 
                             />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -91,8 +97,8 @@
                                 android:id="@+id/seekBar1"
                                 android:layout_width="200dp"
                                 android:layout_height="200dp"
-                                android:progress="15"
                                 android:max="30"
+                                android:progress="15"
                                 android:rotation="270"
                                 android:splitTrack="true"
                                 android:translationX="-87dp" />
@@ -126,8 +132,8 @@
                                 android:id="@+id/seekBar2"
                                 android:layout_width="200dp"
                                 android:layout_height="200dp"
-                                android:progress="15"
                                 android:max="30"
+                                android:progress="15"
                                 android:rotation="270"
 
                                 android:splitTrack="true"
@@ -162,8 +168,8 @@
                                 android:id="@+id/seekBar3"
                                 android:layout_width="200dp"
                                 android:layout_height="200dp"
-                                android:progress="15"
                                 android:max="30"
+                                android:progress="15"
                                 android:rotation="270"
                                 android:splitTrack="true"
                                 android:translationX="-87dp" />
@@ -197,8 +203,8 @@
                                 android:id="@+id/seekBar4"
                                 android:layout_width="200dp"
                                 android:layout_height="200dp"
-                                android:progress="15"
                                 android:max="30"
+                                android:progress="15"
                                 android:rotation="270"
                                 android:splitTrack="true"
                                 android:translationX="-87dp" />
@@ -232,8 +238,8 @@
                                 android:id="@+id/seekBar5"
                                 android:layout_width="200dp"
                                 android:layout_height="200dp"
-                                android:progress="15"
                                 android:max="30"
+                                android:progress="15"
                                 android:rotation="270"
                                 android:splitTrack="true"
                                 android:translationX="-87dp" />
@@ -268,8 +274,8 @@
                                 android:id="@+id/seekBar6"
                                 android:layout_width="200dp"
                                 android:layout_height="200dp"
-                                android:progress="15"
                                 android:max="30"
+                                android:progress="15"
                                 android:rotation="270"
                                 android:splitTrack="true"
                                 android:translationX="-87dp" />
@@ -303,8 +309,8 @@
                                 android:id="@+id/seekBar7"
                                 android:layout_width="200dp"
                                 android:layout_height="200dp"
-                                android:progress="15"
                                 android:max="30"
+                                android:progress="15"
                                 android:rotation="270"
 
                                 android:splitTrack="true"
@@ -339,8 +345,8 @@
                                 android:id="@+id/seekBar8"
                                 android:layout_width="200dp"
                                 android:layout_height="200dp"
-                                android:progress="15"
                                 android:max="30"
+                                android:progress="15"
                                 android:rotation="270"
                                 android:splitTrack="true"
                                 android:translationX="-87dp" />
@@ -375,8 +381,8 @@
                                 android:id="@+id/seekBar9"
                                 android:layout_width="200dp"
                                 android:layout_height="200dp"
-                                android:progress="15"
                                 android:max="30"
+                                android:progress="15"
                                 android:rotation="270"
                                 android:splitTrack="true"
                                 android:translationX="-87dp" />
@@ -410,8 +416,8 @@
                                 android:id="@+id/seekBar10"
                                 android:layout_width="200dp"
                                 android:layout_height="200dp"
-                                android:progress="15"
                                 android:max="30"
+                                android:progress="15"
                                 android:rotation="270"
 
                                 android:splitTrack="true"
@@ -431,12 +437,11 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
-                        android:layout_marginBottom="10dp"
-                        >
+                        android:paddingRight="20dp">
 
                         <TextView
                             android:id="@+id/textViewPreset"
@@ -444,16 +449,16 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:textColor="@color/white"
-                            android:text="preset" />
+                            android:text="preset"
+                            android:textColor="@color/white" />
 
                         <Spinner
                             android:id="@+id/spinner1"
-                            android:layout_gravity="end"
-                            android:gravity="center_horizontal"
                             android:layout_width="40dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="2" />
+                            android:layout_gravity="end"
+                            android:layout_weight="2"
+                            android:gravity="center_horizontal" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -468,73 +473,73 @@
                     android:id="@+id/cardView4"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    app:strokeWidth="2dp"
-                    android:orientation="vertical"
                     android:layout_weight="1"
+                    android:backgroundTint="@color/white"
+                    android:orientation="vertical"
                     app:cardCornerRadius="15dp"
-                    app:cardUseCompatPadding="true">
+                    app:cardUseCompatPadding="true"
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <me.tankery.lib.circularseekbar.CircularSeekBar
                             android:id="@+id/seekbar_baseboost"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:cs_circle_style = "round"
-                            app:cs_progress = "20"
-                            app:cs_max = "100"
-                            app:cs_negative_enabled = "false"
-                            app:cs_move_outside_circle = "true"
-                            app:cs_maintain_equal_circle = "true"
-                            app:cs_use_custom_radii = "false"
+                            app:cs_circle_color="@color/gray"
+                            app:cs_circle_fill="@color/white"
+                            app:cs_circle_progress_color="@color/midnight_blue"
+                            app:cs_circle_stroke_width="5dp"
+                            app:cs_circle_style="round"
+                            app:cs_circle_x_radius="0dp"
+                            app:cs_circle_y_radius="0dp"
 
 
-                            app:cs_circle_x_radius = "0dp"
-                            app:cs_circle_y_radius = "0dp"
-                            app:cs_circle_stroke_width = "5dp"
-                            app:cs_disable_pointer = "false"
-                            app:cs_pointer_stroke_width = "10dp"
-                            app:cs_pointer_halo_width = "5dp"
-                            app:cs_pointer_halo_border_width = "5dp"
-                            app:cs_circle_fill = "@color/white"
-                            app:cs_circle_color = "@color/gray"
-                            app:cs_circle_progress_color = "@color/midnight_blue"
-                            app:cs_pointer_color = "@color/midnight_blue"
-                            app:cs_pointer_alpha_ontouch = "5"
-                            app:cs_pointer_angle = "0"
-                            app:cs_disable_progress_glow = "true"
-                            app:cs_hide_progress_when_empty = "false"
-                            />
+                            app:cs_disable_pointer="false"
+                            app:cs_disable_progress_glow="true"
+                            app:cs_hide_progress_when_empty="false"
+                            app:cs_maintain_equal_circle="true"
+                            app:cs_max="100"
+                            app:cs_move_outside_circle="true"
+                            app:cs_negative_enabled="false"
+                            app:cs_pointer_alpha_ontouch="5"
+                            app:cs_pointer_angle="0"
+                            app:cs_pointer_color="@color/midnight_blue"
+                            app:cs_pointer_halo_border_width="5dp"
+                            app:cs_pointer_halo_width="5dp"
+                            app:cs_pointer_stroke_width="10dp"
+                            app:cs_progress="20"
+                            app:cs_use_custom_radii="false" />
 
                         <TextView
                             android:id="@+id/textViewBaseBoost"
                             android:layout_width="wrap_content"
-                            android:layout_gravity="center_horizontal"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
                             android:layout_marginBottom="5dp"
                             android:text="Bass Boost" />
 
                         <Switch
                             android:id="@+id/switch2"
-                            android:layout_gravity="center_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
-                            android:track="@drawable/switch_track_selector"
-                            android:thumb="@drawable/switch_thumb"
+                            android:layout_gravity="center_horizontal"
                             android:layout_marginBottom="5dp"
-                            />
+                            android:thumb="@drawable/switch_thumb"
+                            android:track="@drawable/switch_track_selector" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardView5"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:backgroundTint="@color/midnight_blue"
                     android:orientation="vertical"
-                    android:layout_weight="1"
                     app:cardCornerRadius="15dp"
                     app:cardUseCompatPadding="true">
 
@@ -542,64 +547,64 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <me.tankery.lib.circularseekbar.CircularSeekBar
                             android:id="@+id/seekbar_loudness"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:cs_circle_style = "round"
-                            app:cs_progress = "20"
-                            app:cs_max = "100"
-                            app:cs_negative_enabled = "false"
-                            app:cs_move_outside_circle = "true"
-                            app:cs_maintain_equal_circle = "true"
-                            app:cs_use_custom_radii = "false"
+                            app:cs_circle_color="@color/gray"
+                            app:cs_circle_fill="@color/midnight_blue"
+                            app:cs_circle_progress_color="@color/white"
+                            app:cs_circle_stroke_width="5dp"
+                            app:cs_circle_style="round"
+                            app:cs_circle_x_radius="0dp"
+                            app:cs_circle_y_radius="0dp"
 
-                            app:cs_circle_x_radius = "0dp"
-                            app:cs_circle_y_radius = "0dp"
-                            app:cs_circle_stroke_width = "5dp"
-                            app:cs_disable_pointer = "false"
-                            app:cs_pointer_stroke_width = "10dp"
-                            app:cs_pointer_halo_width = "5dp"
-                            app:cs_pointer_halo_border_width = "5dp"
-                            app:cs_circle_fill = "@color/midnight_blue"
-                            app:cs_circle_color = "@color/gray"
-                            app:cs_circle_progress_color = "@color/white"
-                            app:cs_pointer_color = "@color/white"
+                            app:cs_disable_pointer="false"
+                            app:cs_disable_progress_glow="true"
+                            app:cs_hide_progress_when_empty="false"
+                            app:cs_maintain_equal_circle="true"
+                            app:cs_max="100"
+                            app:cs_move_outside_circle="true"
+                            app:cs_negative_enabled="false"
+                            app:cs_pointer_alpha_ontouch="5"
+                            app:cs_pointer_angle="0"
+                            app:cs_pointer_color="@color/white"
+                            app:cs_pointer_halo_border_width="5dp"
 
-                            app:cs_pointer_alpha_ontouch = "5"
-                            app:cs_pointer_angle = "0"
-                            app:cs_disable_progress_glow = "true"
-                            app:cs_hide_progress_when_empty = "false"
-                            />
+                            app:cs_pointer_halo_width="5dp"
+                            app:cs_pointer_stroke_width="10dp"
+                            app:cs_progress="20"
+                            app:cs_use_custom_radii="false" />
 
                         <TextView
                             android:id="@+id/textViewLaoudness"
                             android:layout_width="wrap_content"
-                            android:layout_gravity="center_horizontal"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/white"
+                            android:layout_gravity="center_horizontal"
                             android:layout_marginBottom="5dp"
-                            android:text="Loudness" />
+                            android:text="Loudness"
+                            android:textColor="@color/white" />
 
                         <Switch
                             android:id="@+id/switch3"
-                            android:layout_gravity="center_horizontal"
                             android:layout_width="wrap_content"
-
                             android:layout_height="30dp"
-                            android:track="@drawable/switch_track_selector"
-                            android:thumb="@drawable/switch_thumb"
+
+                            android:layout_gravity="center_horizontal"
                             android:layout_marginBottom="5dp"
-                            />
+                            android:thumb="@drawable/switch_thumb"
+                            android:track="@drawable/switch_track_selector" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardView6"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:backgroundTint="@color/white"
                     android:orientation="vertical"
-                    android:layout_weight="1"
                     app:cardCornerRadius="15dp"
                     app:cardUseCompatPadding="true">
 
@@ -607,54 +612,54 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <me.tankery.lib.circularseekbar.CircularSeekBar
                             android:id="@+id/seekbar_virtualizer"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:cs_circle_style = "round"
-                            app:cs_progress = "20"
-                            app:cs_max = "100"
-                            app:cs_negative_enabled = "false"
-                            app:cs_move_outside_circle = "true"
-                            app:cs_maintain_equal_circle = "true"
-                            app:cs_use_custom_radii = "false"
-                            app:cs_circle_x_radius = "0dp"
-                            app:cs_circle_y_radius = "0dp"
-                            app:cs_circle_stroke_width = "5dp"
-                            app:cs_disable_pointer = "false"
-                            app:cs_pointer_stroke_width = "10dp"
-                            app:cs_pointer_halo_width = "5dp"
-                            app:cs_pointer_halo_border_width = "5dp"
-                            app:cs_circle_fill = "@color/white"
-                            app:cs_circle_color = "@color/gray"
-                            app:cs_circle_progress_color = "@color/midnight_blue"
-                            app:cs_pointer_color = "@color/midnight_blue"
-                            app:cs_pointer_alpha_ontouch = "5"
-                            app:cs_pointer_angle = "0"
-                            app:cs_disable_progress_glow = "true"
-                            app:cs_hide_progress_when_empty = "false"
-                            />
+                            app:cs_circle_color="@color/gray"
+                            app:cs_circle_fill="@color/white"
+                            app:cs_circle_progress_color="@color/midnight_blue"
+                            app:cs_circle_stroke_width="5dp"
+                            app:cs_circle_style="round"
+                            app:cs_circle_x_radius="0dp"
+                            app:cs_circle_y_radius="0dp"
+                            app:cs_disable_pointer="false"
+                            app:cs_disable_progress_glow="true"
+                            app:cs_hide_progress_when_empty="false"
+                            app:cs_maintain_equal_circle="true"
+                            app:cs_max="100"
+                            app:cs_move_outside_circle="true"
+                            app:cs_negative_enabled="false"
+                            app:cs_pointer_alpha_ontouch="5"
+                            app:cs_pointer_angle="0"
+                            app:cs_pointer_color="@color/midnight_blue"
+                            app:cs_pointer_halo_border_width="5dp"
+                            app:cs_pointer_halo_width="5dp"
+                            app:cs_pointer_stroke_width="10dp"
+                            app:cs_progress="20"
+                            app:cs_use_custom_radii="false" />
 
                         <TextView
                             android:id="@+id/textViewVirtualizer"
                             android:layout_width="wrap_content"
-                            android:layout_gravity="center_horizontal"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
                             android:layout_marginBottom="5dp"
                             android:text="Volume" />
 
                         <Switch
                             android:id="@+id/switch4"
-                            android:layout_gravity="center_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
-                            android:checked="true"
-                            android:track="@drawable/switch_track_selector"
-                            android:thumb="@drawable/switch_thumb"
+                            android:layout_gravity="center_horizontal"
                             android:layout_marginBottom="5dp"
-                            />
+                            android:checked="true"
+                            android:thumb="@drawable/switch_thumb"
+                            android:track="@drawable/switch_track_selector" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</ScrollView>

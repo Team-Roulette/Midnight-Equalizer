@@ -1,8 +1,8 @@
-package com.example.pitchcontroller.repositories
+package com.roulette.mideq.repositories
 
-import com.example.pitchcontroller.R
-import com.example.pitchcontroller.models.Frequencies
-import com.example.pitchcontroller.models.Preset
+import com.roulette.mideq.R
+import com.roulette.mideq.models.Frequencies
+import com.roulette.mideq.models.Preset
 
 
 val presetList = arrayListOf("Normal", "Classical", "Dance", "Flat", "Folk", "Heavy Metal", "Hip Hop", "Jazz", "Pop", "Rock", "Acoustic", "Vocal Boost", "Bass Boost", "Treble Boost",  "Deep House", "EDM", "RnB", "Dream")

@@ -1,9 +1,9 @@
-package com.example.pitchcontroller.views.viewmodels
+package com.roulette.mideq.views.viewmodels
 
 import android.media.AudioManager
 import androidx.lifecycle.ViewModel
-import com.example.pitchcontroller.models.Strength
-import com.example.pitchcontroller.utils.DynamicsProcessingService
+import com.roulette.mideq.models.Strength
+import com.roulette.mideq.utils.DynamicsProcessingService
 
 private const val TAG = "MainViewModel"
 
