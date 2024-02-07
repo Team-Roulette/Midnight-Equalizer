@@ -90,12 +90,11 @@ class MainActivity : AppCompatActivity() {
         private fun checkPermissions() {
             Log.i("test", "checkPermissions")
             when {
-                (permissions.all { checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED }) -> { Log.i("test", "permission check O"); init() }
+                (permissions.all { checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED }) -> init()
                 (ActivityCompat.shouldShowRequestPermissionRationale (this, android.Manifest.permission.POST_NOTIFICATIONS)
                 || ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_MEDIA_AUDIO)
-                || ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.RECORD_AUDIO)) ->
-                    {Log.i("test", "permission check X");permissionCheckAlertDialog()}
-                else -> {Log.i("test", "else");multiplePermissionLauncher.launch(permissions)}
+                || ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.RECORD_AUDIO)) -> permissionCheckAlertDialog()
+                else -> multiplePermissionLauncher.launch(permissions)
 
             }
         }
