@@ -30,7 +30,7 @@ class ForegroundService() : Service() {
         val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         val notificationChannelId = "Notification Channel ID"
         // 안드로이드 Oreo 이상을 위한 알림 채널 생성
-        val channelName = "Equalizer Service"
+        val channelName = "Midnight Equalizer Service"
         val channel = NotificationChannel(
             notificationChannelId,
             channelName,
@@ -41,7 +41,7 @@ class ForegroundService() : Service() {
 
         val notificationBuilder = NotificationCompat.Builder(this, notificationChannelId)
         val notification = notificationBuilder.setOngoing(true)
-            .setContentTitle("Equalizer and Bass Booster")
+            .setContentTitle("Midnight Equalizer")
             .setContentText("Now Running!")
             .setSmallIcon(R.mipmap.ic_main_round)
             .setContentIntent(pendingIntent)
