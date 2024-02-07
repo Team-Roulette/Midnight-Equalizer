@@ -41,9 +41,9 @@ class ForegroundService() : Service() {
 
         val notificationBuilder = NotificationCompat.Builder(this, notificationChannelId)
         val notification = notificationBuilder.setOngoing(true)
-            .setSmallIcon(R.mipmap.ic_launcher)
             .setContentTitle("Equalizer and Bass Booster")
             .setContentText("Now Running!")
+            .setSmallIcon(R.mipmap.ic_main_round)
             .setContentIntent(pendingIntent)
             .build()
 //        isServiceRunning.postValue(true)
