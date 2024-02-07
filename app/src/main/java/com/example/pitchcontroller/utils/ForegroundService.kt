@@ -25,12 +25,12 @@ class ForegroundService() : Service() {
         Log.i("test", "startForegroundService")
 
         val intent = Intent(this, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK and Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         val notificationChannelId = "Notification Channel ID"
         // 안드로이드 Oreo 이상을 위한 알림 채널 생성
-        val channelName = "피컨 Foreground Service"
+        val channelName = "Equalizer Service"
         val channel = NotificationChannel(
             notificationChannelId,
             channelName,
@@ -42,8 +42,8 @@ class ForegroundService() : Service() {
         val notificationBuilder = NotificationCompat.Builder(this, notificationChannelId)
         val notification = notificationBuilder.setOngoing(true)
             .setSmallIcon(R.mipmap.ic_launcher)
-            .setContentTitle("피컨")
-            .setContentText("음정 조절 앱 테스트 중")
+            .setContentTitle("Equalizer and Bass Booster")
+            .setContentText("Now Running!")
             .setContentIntent(pendingIntent)
             .build()
 //        isServiceRunning.postValue(true)

@@ -21,12 +21,17 @@ import android.graphics.PorterDuff
 import android.media.AudioManager
 
 import android.media.audiofx.Visualizer
+import android.net.Uri
+import android.os.PersistableBundle
+import android.provider.Settings
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.pitchcontroller.utils.ForegroundService
-import com.example.pitchcontroller.viewmodels.MainViewModel
+import com.example.pitchcontroller.views.viewmodels.MainViewModel
 import com.example.pitchcontroller.views.WaveformView
 
 private const val TAG = "MainActivity"
@@ -42,6 +47,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var audioManager: AudioManager
     private var currentVolume = 0
     private var isNotMuted = true
+    private var returningFromSettings = false
 
     private lateinit var binding: ActivityMainBinding
     private val mainViewModel: MainViewModel by viewModels()
@@ -53,40 +59,64 @@ class MainActivity : AppCompatActivity() {
     )
     private val multiplePermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){
+            Log.i("test", "multiplePermissionLauncher.launch")
             val resultPermission = it.all{map ->
                 map.value
             }
             if(!resultPermission){
-                Toast.makeText(this, "모든 권한 승인되어야 함", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "All Permissions must be allowed!", Toast.LENGTH_SHORT).show()
+                permissionCheckAlertDialog()
             }
+            else init()
         }
-    var audioPlayer: DynamicsProcessingService? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        audioSessionId = AudioManager.AUDIO_SESSION_ID_GENERATE
         binding = ActivityMainBinding.inflate(layoutInflater)
         checkPermissions()
         setContentView(binding.root)
     }
 
-
-
     private fun checkPermissions() {
         Log.i("test", "checkPermissions")
-        if (!permissions.all { checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED }) multiplePermissionLauncher.launch(permissions)
-        else init()
+        when {
+            (permissions.all { checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED }) -> { Log.i("test", "permission check O"); init() }
+            (ActivityCompat.shouldShowRequestPermissionRationale (this, android.Manifest.permission.POST_NOTIFICATIONS)
+            || ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_MEDIA_AUDIO)
+            || ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.RECORD_AUDIO)) ->
+                {Log.i("test", "permission check X");permissionCheckAlertDialog()}
+            else -> {Log.i("test", "else");multiplePermissionLauncher.launch(permissions)}
+
+        }
+    }
+
+    fun permissionCheckAlertDialog(){
+        Log.i("test", "permissionCheckAlertDialog")
+        val builder = AlertDialog.Builder(this).setCancelable(false)
+        builder.setMessage("All Permissions must be allowed.").setTitle("Permission Check").setPositiveButton("OK"){
+                _, _ ->
+            multiplePermissionLauncher.launch(permissions)
+        }.setNeutralButton("Go to Settings") { dlg, _ ->
+            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                data = Uri.fromParts("package", packageName, null)
+            }
+            startActivity(intent)
+            returningFromSettings = true
+            dlg.dismiss()
+        }
+        val dialog = builder.create()
+        dialog.show()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        Log.i("test", "onRequestPermissionsResult")
+//        Log.i("test", "onRequestPermissionsResult")
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             MY_PERMISSIONS_REQUEST_READ_CONTACTS -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     // 권한이 부여되었을 때의 로직
                     Log.i("test", "Granted")
-                    init()
+//                    init()
                 } else {
                     // 권한이 거부되었을 때의 로직
                     Log.i("test", "Not Granted")
@@ -99,9 +129,8 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("ResourceType")
     private fun init() {
-
-
         Log.i("test", "init")
+        audioSessionId = AudioManager.AUDIO_SESSION_ID_GENERATE
         val serviceIntent = Intent(this, ForegroundService::class.java)
         startForegroundService(serviceIntent)
 
@@ -114,6 +143,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initVisualizer() {
+        if (::visualizer.isInitialized && visualizer.enabled) {
+            visualizer.release()
+        }
         waveformView = binding.waveformView
         visualizer = Visualizer(audioSessionId).apply {
             captureSize = Visualizer.getCaptureSizeRange()[1]
@@ -303,12 +335,21 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (returningFromSettings) {
+            checkPermissions()
+        }
+        returningFromSettings = false
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         if (::visualizer.isInitialized) {
             visualizer.release() // 리소스 정리
         }
-
+        val serviceIntent = Intent(this, ForegroundService::class.java)
+        stopService(serviceIntent)
         mainViewModel.releaseEqualizer()
     }
 }

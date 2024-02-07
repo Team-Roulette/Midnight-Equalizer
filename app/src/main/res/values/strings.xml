@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PitchController</string>
+    <string name="app_name">Equalizer and Bass Booster</string>
 
     <string name="preset_normal">Normal</string>
     <string name="preset_classical">Classical</string>

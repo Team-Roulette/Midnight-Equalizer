@@ -1,4 +1,4 @@
-package com.example.pitchcontroller.viewmodels
+package com.example.pitchcontroller.views.viewmodels
 
 import android.media.AudioManager
 import androidx.lifecycle.ViewModel
