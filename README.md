@@ -1,11 +1,7 @@
-## 마무리
+## Midnight Equalizer
 
-### 1. 앱 내 볼륨 조절을 통해 SeekBar의 게이지 조정
+<p align="center">
+<img src="https://github.com/Team-Roulette/Midnight-Equalizer/assets/101652649/f00322fe-e853-4470-9b4e-45354aed34a0"
+  width="800" height="400">
+</p>
 
-### 2. 스플래시 구성
-
-### 3. 알림창 디자인
-
-### 4. 앱 아이콘 만들기
-
-### 5. 구글 플레이스토어 배포
