@@ -7,9 +7,9 @@
 
 <img src="https://img.shields.io/badge/Platform-Android-Color"> <img src="https://img.shields.io/badge/minSdkVersion-30-Color">
 
-[<img src = "https://github.com/Team-Roulette/Midnight-Equalizer/assets/101652649/9301f88e-49b6-49f2-bdb6-1a6757a0a017"/>]()
+## Download
 
-<br>
+[<img src = "https://github.com/Team-Roulette/Midnight-Equalizer/assets/101652649/9301f88e-49b6-49f2-bdb6-1a6757a0a017"/>]()
 
 ## About
 
