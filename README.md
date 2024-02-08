@@ -26,3 +26,9 @@ Introducing the ultimate sound experience app designed to elevate your listening
 **Loudness Enhancer Effect:** This feature will provide a fuller, more immersive sound experience.
 
 Our application is a testament to the power of high-quality sound. With its user-friendly interface, detailed customization options, and robust sound enhancement features, it's the perfect companion for both audiophiles and casual listeners alike. Whether you're relaxing at home, powering through a workout, or setting the mood for a night out, our app guarantees an unparalleled auditory experience. Join us on this sonic adventure and redefine the way you listen to music.
+
+## Features
+
+- Written in Kotlin and XML
+- Used Audio Effect and DynamicsProcessing for EQ, Bass boost and Loudness Enhancer
+- Used Visualizer to visualize music
