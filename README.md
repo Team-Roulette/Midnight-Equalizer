@@ -9,6 +9,8 @@
 
 [<img src = "https://github.com/Team-Roulette/Midnight-Equalizer/assets/101652649/9301f88e-49b6-49f2-bdb6-1a6757a0a017"/>]()
 
+## About
+
 Introducing the ultimate sound experience app designed to elevate your listening journey with its sophisticated and intuitive features. Wrapped in a midnight blue color scheme, this application delivers not just functionality but an aesthetic appeal that resonates with a modern and refined sensibility. Here's what makes this app stand out:
 
 **Midnight Blue UI:** The midnight blue color palette ensures a comfortable viewing experience, especially during night-time sessions, reflecting a chic and contemporary vibe.
